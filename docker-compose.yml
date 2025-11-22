@@ -1,0 +1,20 @@
+services:
+  database:
+    image: postgres:18.1-bo
+  backend:
+    container_name: erp-backend
+    build:
+      target: development
+      context: backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/src:/app/src
+  frontend:
+    container_name: erp-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - "5173:5173"
