@@ -1,6 +1,8 @@
 services:
   database:
-    image: postgres:18.1-bo
+    image: postgres:18.1-bookworm
+    env_file:
+      - .env
   backend:
     container_name: erp-backend
     build:
@@ -9,6 +11,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend/src:/app/src
+      - ./backend/prisma:/app/prisma
+    env_file:
+      - .env
+    depends_on:
+      - database
   frontend:
     container_name: erp-frontend
     build:
