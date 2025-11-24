@@ -22,6 +22,7 @@ services:
   frontend:
     container_name: erp-frontend
     build:
+      target: development
       context: frontend
       dockerfile: Dockerfile
     volumes:
