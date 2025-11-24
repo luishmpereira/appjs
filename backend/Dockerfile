@@ -1,6 +1,7 @@
 FROM node:24.11.1-bookworm-slim AS base
 WORKDIR /app
 COPY package*.json ./
+RUN apt-get update -y && apt-get install -y openssl
 
 # Stage for development
 FROM base AS development
