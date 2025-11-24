@@ -42,3 +42,15 @@ describe("POST /auth/register", () => {
     expect(res.status).toBe(400);
   });
 });
+
+describe("POST /auth/setup", () => {
+  it("should setup admin user", async () => {
+    const res = await api.post("/auth/setup").send({
+      name: "Admin User",
+      email: "admin@example.com",
+      password: "12345678"
+    });
+
+    expect(res.status).toBe(201);
+  });
+});

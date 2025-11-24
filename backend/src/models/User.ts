@@ -5,17 +5,19 @@ import {
   Sequelize
 } from "sequelize";
 import bcrypt from "bcryptjs";
+import { Role } from "./Role";
 
 export interface UserAttributes {
   id: number;
   name: string;
   email: string;
   password: string;
-  role: "user" | "admin";
+  roleId?: number;
+  avatar?: string;
 }
 
 export interface UserCreationAttributes
-  extends Optional<UserAttributes, "id" | "role"> {}
+  extends Optional<UserAttributes, "id" | "roleId" | "avatar"> {}
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
@@ -25,7 +27,9 @@ export class User
   public name!: string;
   public email!: string;
   public password!: string;
-  public role!: "user" | "admin";
+  public avatar?: string;
+  public roleId!: number;
+  public role?: Role;
 
   public validPassword(password: string): boolean {
     return bcrypt.compareSync(password, this.password);
@@ -53,9 +57,17 @@ export class User
           type: DataTypes.STRING,
           allowNull: false,
         },
-        role: {
-          type: DataTypes.ENUM("user", "admin"),
-          defaultValue: "user",
+        avatar: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        roleId: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          references: {
+            model: "roles",
+            key: "id",
+          },
         },
       },
       {

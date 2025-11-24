@@ -3,9 +3,9 @@
     "module": "commonjs",
     "target": "es2020",
     "outDir": "dist",
-    "rootDir": ".",
     "lib": ["es2020", "DOM"],
     "types": ["node", "jest"],
+    "baseUrl": ".",
     "paths": {
       "@/*" : ["./src/*"]
     },

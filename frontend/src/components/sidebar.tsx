@@ -1,15 +1,25 @@
-import { Home, BarChart3, Settings } from "lucide-react";
+import { Home, BarChart3, Settings, Users, Shield, PackageOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Sidebar() {
+  const { user } = useAuth();
+
   return (
     <aside className="w-64 h-screen bg-gray-900 text-gray-100 p-4">
       <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
 
       <nav className="space-y-4">
         <SidebarItem icon={<Home />} label="Dashboard" to="/" />
-        <SidebarItem icon={<BarChart3 />} label="Reports" to="/reports" />
-        <SidebarItem icon={<Settings />} label="Settings" to="/settings" />
+        <SidebarItem icon={<BarChart3 />} label="Relatórios" to="/reports" />
+        {user?.role === "admin" && (
+          <>
+            <SidebarItem icon={<PackageOpen />} label="Produtos" to="/products" />
+            <SidebarItem icon={<Users />} label="Usuários" to="/users" />
+            <SidebarItem icon={<Shield />} label="Papéis" to="/roles" />
+          </>
+        )}
+        <SidebarItem icon={<Settings />} label="Configurações" to="/settings" />
       </nav>
     </aside>
   );
