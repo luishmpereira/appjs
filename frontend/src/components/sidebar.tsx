@@ -1,4 +1,4 @@
-import { Home, BarChart3, Settings, Users, Shield, PackageOpen } from "lucide-react";
+import { Home, BarChart3, Settings, Users, Shield, PackageOpen, ShoppingCart } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -12,9 +12,10 @@ export function Sidebar() {
       <nav className="space-y-4">
         <SidebarItem icon={<Home />} label="Dashboard" to="/" />
         <SidebarItem icon={<BarChart3 />} label="Relatórios" to="/reports" />
+        <SidebarItem icon={<ShoppingCart />} label="Caixa" to="/checkout" />
         {user?.role === "admin" && (
           <>
-            <SidebarItem icon={<PackageOpen />} label="Produtos" to="/products" />
+            <SidebarItem icon={<PackageOpen />} label="Inventário" to="/inventory" />
             <SidebarItem icon={<Users />} label="Usuários" to="/users" />
             <SidebarItem icon={<Shield />} label="Papéis" to="/roles" />
           </>

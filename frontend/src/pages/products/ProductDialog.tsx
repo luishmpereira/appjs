@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { api } from "@/lib/axios";
+import { useProductStore } from "@/store/productStore";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
 
@@ -31,6 +31,7 @@ export function ProductDialog({
     const [price, setPrice] = useState<number>(0);
     const [description, setDescription] = useState('');
     const [error, setError] = useState('');
+    const { saveProduct } = useProductStore();
 
     useEffect(() => {
         if (product) {
@@ -47,16 +48,10 @@ export function ProductDialog({
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            const url = product ? `/products/${product.id}` : "/products";
-            const method = product ? "put" : "post";
-
-            const body = { name, price, description };
-
-            await api[method](url, body);
-
+            await saveProduct({ id: product?.id, name, price, description });
             onSave();
         } catch (err: any) {
-            setError(err.response?.data?.error || "Failed to save product");
+            setError(err.response?.data?.error || "Erro ao salvar produto");
         } finally {
             onOpenChange(false);
         }

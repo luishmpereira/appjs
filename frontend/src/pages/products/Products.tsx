@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ProductsTable } from "./ProductsTable";
 import { useEffect, useState } from "react";
-import { api } from "@/lib/axios";
 import { ProductDialog } from "./ProductDialog";
+import { useProductStore } from "@/store/productStore";
 
 interface Product {
     id: number;
@@ -14,32 +14,28 @@ interface Product {
 }
 
 export function Products() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const { products, fetchProducts, deleteProduct, loading } = useProductStore();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchProducts();
     }, []);
 
-    async function fetchProducts() {
-        try {
-            const { data } = await api.get("/products");
-            setProducts(data);
-        } catch (error) {
-            console.error("Failed to fetch products", error);
-        } finally {
-            setLoading(false);
-        }
+    function handleCreate() {
+        setSelectedProduct(null);
+        setIsDialogOpen(true);
+    }
+
+    function handleEdit(product: Product) {
+        setSelectedProduct(product);
+        setIsDialogOpen(true);
     }
 
     async function handleDelete(id: number) {
         if (!confirm("Tem certeza que deseja deletar este usuário?")) return;
-
         try {
-            await api.delete(`/products/${id}`);
-            setProducts(products.filter((u) => u.id !== id));
+            await deleteProduct(id);
         } catch (error) {
             console.error("Failed to delete product", error);
         }
@@ -49,24 +45,20 @@ export function Products() {
         <div>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Produtos</h1>
-                <Button onClick={() => setIsDialogOpen(true)}>
+                <Button onClick={handleCreate}>
                     <Plus className="mr-2 h-4 w-4" />
                     Adicionar Produto
                 </Button>
             </div>
 
-            {false ? (
+            {loading ? (
                 <p>Carregando...</p>
             ) : (
-                <ProductsTable products={products} onEdit={() => { }} onDelete={handleDelete} />
+                <ProductsTable
+                    products={products}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete} />
             )}
-
-            {/* <UserDialog
-                open={isDialogOpen}
-                onOpenChange={setIsDialogOpen}
-                user={selectedUser}
-                onSave={handleSave}
-            /> */}
             <ProductDialog
                 open={isDialogOpen}
                 onOpenChange={setIsDialogOpen}

@@ -5,33 +5,32 @@ import {
   Sequelize
 } from "sequelize";
 import { Product } from "./Product";
-import { User } from "./User";
+import { Movement } from "./Movement";
 
-export interface StockMovementAttributes {
+export interface MovementLineAttributes {
   id: number;
   productId: number;
-  type: "IN" | "OUT";
   quantity: number;
-  reason?: string;
-  userId: number;
+  movementId: number;
 }
 
-export interface StockMovementCreationAttributes
-  extends Optional<StockMovementAttributes, "id" | "reason"> {}
+export interface MovementLineCreationAttributes
+  extends Optional<MovementLineAttributes, "id"> {}
 
-export class StockMovement
-  extends Model<StockMovementAttributes, StockMovementCreationAttributes>
-  implements StockMovementAttributes
+export class MovementLine
+  extends Model<MovementLineAttributes, MovementLineCreationAttributes>
+  implements MovementLineAttributes
 {
   public id!: number;
   public productId!: number;
-  public type!: "IN" | "OUT";
   public quantity!: number;
-  public reason?: string;
-  public userId!: number;
+  public movementId!: number;
+
+  public readonly product?: Product;
+  public readonly movement?: Movement;
 
   static initModel(sequelize: Sequelize) {
-    StockMovement.init(
+    MovementLine.init(
       {
         id: {
           type: DataTypes.INTEGER,
@@ -46,32 +45,25 @@ export class StockMovement
             key: "id",
           },
         },
-        type: {
-          type: DataTypes.ENUM("IN", "OUT"),
-          allowNull: false,
-        },
         quantity: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        reason: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        userId: {
+        movementId: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
-            model: "users",
+            model: "movements",
             key: "id",
           },
         },
       },
       {
         sequelize,
-        tableName: "stock_movements",
+        tableName: "movement_lines",
+        timestamps: false,
       }
     );
-    return StockMovement;
+    return MovementLine;
   }
 }

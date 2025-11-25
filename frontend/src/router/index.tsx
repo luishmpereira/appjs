@@ -8,7 +8,14 @@ import Users from "@/pages/users/Users";
 import Roles from "@/pages/roles/Roles";
 import Login from "@/pages/auth/Login";
 import SetupAdmin from "@/pages/auth/SetupAdmin";
+import { Inventory } from "@/pages/inventory";
 import { Products } from "@/pages/products/Products";
+import { Stock } from "@/pages/stock/Stock";
+import { StockForm } from "@/pages/stock/StockForm";
+
+import { Operations } from "@/pages/operations/Operations";
+import { OperationForm } from "@/pages/operations/OperationForm";
+import { Checkout } from "@/pages/checkout/Checout";
 
 export const router = createBrowserRouter([
     {
@@ -36,8 +43,8 @@ export const router = createBrowserRouter([
                 element: <Users />,
             },
             {
-                path: "products",
-                element: <Products />,
+                path: "inventory",
+                element: <Inventory />,
             },
             {
                 path: "reports",
@@ -47,6 +54,38 @@ export const router = createBrowserRouter([
                 path: "settings",
                 element: <Settings />,
             },
+            {
+                path: "inventory/products",
+                element: <Products />,
+            },
+            {
+                path: "/inventory/stock",
+                element: <Stock />,
+            },
+            {
+                path: "/inventory/stock/new",
+                element: <StockForm />,
+            },
+            {
+                path: "/inventory/stock/:id",
+                element: <StockForm />,
+            },
+            {
+                path: "/inventory/operations",
+                element: <Operations />,
+            },
+            {
+                path: "/inventory/operations/new",
+                element: <OperationForm />,
+            },
+            {
+                path: "/inventory/operations/:id",
+                element: <OperationForm />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
+            }
         ],
     },
 ]);

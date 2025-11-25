@@ -4,10 +4,7 @@ import {
     getProduct, 
     createProduct, 
     updateProduct, 
-    deleteProduct,
-    addStock,
-    removeStock,
-    getStockHistory
+    deleteProduct
 } from "../controllers/productController";
 import { authenticateJWT, checkAbility } from "../middlewares/auth";
 
@@ -22,8 +19,8 @@ router.put("/:id", checkAbility("update", "Product"), updateProduct);
 router.delete("/:id", checkAbility("delete", "Product"), deleteProduct);
 
 // Stock operations
-router.post("/:id/stock/in", checkAbility("update", "Product"), addStock);
-router.post("/:id/stock/out", checkAbility("update", "Product"), removeStock);
-router.get("/:id/history", checkAbility("read", "Product"), getStockHistory);
+// router.post("/:id/stock/in", checkAbility("update", "Product"), addStock);
+// router.post("/:id/stock/out", checkAbility("update", "Product"), removeStock);
+// router.get("/:id/history", checkAbility("read", "Product"), getStockHistory);
 
 export default router;
