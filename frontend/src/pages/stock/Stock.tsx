@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
+import { Pagination } from "@/components/ui/pagination-controls";
+
 interface Movement {
     id: number;
     stockMovementCode: string;
@@ -19,15 +21,18 @@ export function Stock() {
     const navigate = useNavigate();
     const [movements, setMovements] = useState<Movement[]>([]);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         loadMovements();
-    }, []);
+    }, [page]);
 
     const loadMovements = async () => {
         try {
-            const { data } = await api.get("/movements");
-            setMovements(data);
+            const { data } = await api.get(`/movements?page=${page}&limit=10`);
+            setMovements(data.data);
+            setTotalPages(data.meta.last_page);
         } catch (error) {
             console.error("Error loading movements:", error);
         } finally {
@@ -117,6 +122,7 @@ export function Stock() {
                         </TableBody>
                     </Table>
             </div>
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
         </div>
     );
 }

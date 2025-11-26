@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { UsersTable } from "./UsersTable";
 import { UserDialog } from "./UserDialog";
 import { useUserStore } from "@/store/userStore";
+import { Pagination } from "@/components/ui/pagination-controls";
 
 interface User {
   id: number;
@@ -14,13 +15,17 @@ interface User {
 }
 
 export default function Users() {
-  const { users, loading, fetchUsers, deleteUser } = useUserStore();
+  const { users, loading, fetchUsers, deleteUser, page, totalPages } = useUserStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  function handlePageChange(newPage: number) {
+    fetchUsers(newPage);
+  }
 
   async function handleDelete(id: number) {
     if (!confirm("Tem certeza que deseja deletar este usuário?")) return;
@@ -60,7 +65,10 @@ export default function Users() {
       {loading ? (
         <p>Carregando...</p>
       ) : (
-        <UsersTable users={users} onEdit={handleEdit} onDelete={handleDelete} />
+        <>
+            <UsersTable users={users} onEdit={handleEdit} onDelete={handleDelete} />
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+        </>
       )}
 
       <UserDialog

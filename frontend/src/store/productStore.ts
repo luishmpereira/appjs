@@ -12,7 +12,9 @@ interface Product {
 interface ProductState {
   products: Product[];
   loading: boolean;
-  fetchProducts: () => Promise<void>;
+  page: number;
+  totalPages: number;
+  fetchProducts: (page?: number) => Promise<void>;
   saveProduct: (product: Partial<Product>) => Promise<void>;
   deleteProduct: (id: number) => Promise<void>;
 }
@@ -20,10 +22,17 @@ interface ProductState {
 export const useProductStore = create<ProductState>((set, get) => ({
   products: [],
   loading: true,
-  fetchProducts: async () => {
+  page: 1,
+  totalPages: 1,
+  fetchProducts: async (page = 1) => {
     try {
-      const { data } = await api.get("/products");
-      set({ products: data, loading: false });
+      const { data } = await api.get(`/products?page=${page}&limit=10`);
+      set({ 
+          products: data.data, 
+          loading: false,
+          page: data.meta.page,
+          totalPages: data.meta.last_page
+      });
     } catch (error) {
       console.error("Failed to fetch products", error);
     }
@@ -33,7 +42,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
       const url = product.id ? `/products/${product.id}` : "/products";
       const method = product.id ? "PUT" : "POST";
       await api.request({ url, method, data: product });
-      get().fetchProducts();
+      get().fetchProducts(get().page);
     } catch (error) {
       console.error("Failed to save product", error);
     }
@@ -41,7 +50,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
   deleteProduct: async (id: number) => {
     try {
       await api.delete(`/products/${id}`);
-      get().fetchProducts();
+      get().fetchProducts(get().page);
     } catch (error) {
       console.error("Failed to delete product", error);
     }

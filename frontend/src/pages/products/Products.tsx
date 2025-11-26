@@ -4,6 +4,7 @@ import { ProductsTable } from "./ProductsTable";
 import { useEffect, useState } from "react";
 import { ProductDialog } from "./ProductDialog";
 import { useProductStore } from "@/store/productStore";
+import { Pagination } from "@/components/ui/pagination-controls";
 
 interface Product {
     id: number;
@@ -14,13 +15,17 @@ interface Product {
 }
 
 export function Products() {
-    const { products, fetchProducts, deleteProduct, loading } = useProductStore();
+    const { products, fetchProducts, deleteProduct, loading, page, totalPages } = useProductStore();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    function handlePageChange(newPage: number) {
+        fetchProducts(newPage);
+    }
 
     function handleCreate() {
         setSelectedProduct(null);
@@ -54,10 +59,14 @@ export function Products() {
             {loading ? (
                 <p>Carregando...</p>
             ) : (
-                <ProductsTable
-                    products={products}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete} />
+                <>
+                    <ProductsTable
+                        products={products}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete} 
+                    />
+                    <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+                </>
             )}
             <ProductDialog
                 open={isDialogOpen}

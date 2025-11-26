@@ -4,8 +4,23 @@ import { subject } from "@casl/ability";
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const products = await Product.findAll({ order: [["name", "ASC"]] });
-    return res.json(products);
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+
+    const { count, rows } = await Product.findAndCountAll({ 
+        order: [["name", "ASC"]],
+        limit,
+        offset
+    });
+    return res.json({
+        data: rows,
+        meta: {
+            total: count,
+            page,
+            last_page: Math.ceil(count / limit),
+        }
+    });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }

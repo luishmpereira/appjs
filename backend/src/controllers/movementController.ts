@@ -3,10 +3,23 @@ import { Movement, MovementLine, sequelize } from "../models";
 
 export const getAllMovements = async (req: Request, res: Response) => {
     try {
-        const movements = await Movement.findAll({
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 10;
+        const offset = (page - 1) * limit;
+
+        const { count, rows } = await Movement.findAndCountAll({
             order: [["createdAt", "DESC"]],
+            limit,
+            offset,
         });
-        return res.json(movements);
+        return res.json({
+            data: rows,
+            meta: {
+                total: count,
+                page,
+                last_page: Math.ceil(count / limit),
+            }
+        });
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
     }

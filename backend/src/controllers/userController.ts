@@ -6,17 +6,31 @@ import { subject } from "@casl/ability";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users = await User.findAll({
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+
+    const { count, rows } = await User.findAndCountAll({
       attributes: { exclude: ["password"] },
       include: [{ model: Role, as: "role" }],
       order: [["id", "ASC"]],
+      limit,
+      offset
     });
     // Flatten role for frontend compatibility if needed, or update frontend
-    const formattedUsers = users.map(u => ({
+    const formattedUsers = rows.map(u => ({
         ...u.toJSON(),
         role: u.role?.name
     }));
-    return res.json(formattedUsers);
+    
+    return res.json({
+        data: formattedUsers,
+        meta: {
+            total: count,
+            page,
+            last_page: Math.ceil(count / limit),
+        }
+    });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }

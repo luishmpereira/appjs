@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
+import { Pagination } from "@/components/ui/pagination-controls";
+
 interface Operation {
     id: number;
     name: string;
@@ -19,15 +21,18 @@ export function Operations() {
     const navigate = useNavigate();
     const [operations, setOperations] = useState<Operation[]>([]);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         loadOperations();
-    }, []);
+    }, [page]);
 
     const loadOperations = async () => {
         try {
-            const { data } = await api.get("/operations");
-            setOperations(data);
+            const { data } = await api.get(`/operations?page=${page}&limit=10`);
+            setOperations(data.data);
+            setTotalPages(data.meta.last_page);
         } catch (error) {
             console.error("Error loading operations:", error);
         } finally {
@@ -112,7 +117,8 @@ export function Operations() {
                         )}
                     </TableBody>
                 </Table>
-            </div>
-        </div>
+                </div>
+                <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+                </div>
     );
 }

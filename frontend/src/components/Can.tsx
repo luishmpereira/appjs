@@ -13,9 +13,11 @@ export const useAbility = () => {
     const user = useAuthStore((state) => state.user);
     const ability = getCurrentAbility();
     
-    // We might need a way to force re-render or update the context if using it directly,
-    // but creating a fresh ability object usually works if components re-render.
-    // Ideally, the Ability instance itself should update its rules.
+    useEffect(() => {
+        const role = user?.role;
+        const permissions = (typeof role === 'object' && role !== null) ? role.permissions || [] : [];
+        ability.update(permissions);
+    }, [user, ability]);
     
     return ability;
 }

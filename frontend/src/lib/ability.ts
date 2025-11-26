@@ -2,7 +2,7 @@ import { AbilityBuilder, createMongoAbility } from "@casl/ability";
 import { useAuthStore } from "@/store/authStore";
 
 export const defineAbilitiesFor = (user: any) => {
-  const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
+  const { can, build } = new AbilityBuilder(createMongoAbility);
 
   if (!user) {
     return build();
