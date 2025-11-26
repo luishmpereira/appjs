@@ -69,7 +69,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ]);
+    ], { ignoreDuplicates: true });
 
     // 3. Add roleId to users
     await queryInterface.addColumn('users', 'roleId', {
