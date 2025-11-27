@@ -1,12 +1,12 @@
 import { api } from "./testServer";
-import { sequelize } from "../config/database";
+import prisma from "../config/database";
 
 beforeAll(async () => {
-  await sequelize.sync({ force: true });
+  await prisma.$connect
 });
 
 afterAll(async () => {
-  await sequelize.close();
+  await prisma.$disconnect();
 });
 
 describe("POST /auth/register", () => {

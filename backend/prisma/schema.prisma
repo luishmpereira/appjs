@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               Int        @id @default(autoincrement())
+  email            String     @unique
+  name             String
+  password         String
+  avatar           String?
+  roleId           Int
+  role             Role       @relation(fields: [roleId], references: [id])
+  createdMovements Movement[] @relation("createdBy")
+  updatedMovements Movement[] @relation("updatedBy")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+model Role {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  users       User[]
+  permissions Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String
+  price         Float
+  stockQuantity Int
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  movementLines MovementLine[]
+}
+
+model Movement {
+  id           Int            @id @default(autoincrement())
+  lines        MovementLine[]
+  movementDate DateTime       @default(now())
+  quantity     Int
+  operationId  Int
+  operation    Operation      @relation(fields: [operationId], references: [id])
+  type         String
+  createdBy    User           @relation(fields: [createdById], references: [id], name: "createdBy")
+  createdById  Int
+  updatedBy    User           @relation(fields: [updatedById], references: [id], name: "updatedBy")
+  updatedById  Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model MovementLine {
+  id         Int      @id @default(autoincrement())
+  movementId Int
+  movement   Movement @relation(fields: [movementId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  quantity   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Operation {
+  id              Int        @id @default(autoincrement())
+  name            String
+  operationCode   String
+  changeInventory Boolean
+  hasFinance      Boolean
+  operationType   String
+  movements       Movement[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}

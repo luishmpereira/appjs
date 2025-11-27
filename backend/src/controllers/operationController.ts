@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Operation } from "../models";
 import { subject } from "@casl/ability";
+import prisma from '../config/database';
 
 export const getAllOperations = async (req: Request, res: Response) => {
   try {
@@ -8,17 +8,17 @@ export const getAllOperations = async (req: Request, res: Response) => {
     const limit = parseInt(req.query.limit as string) || 10;
     const offset = (page - 1) * limit;
 
-    const { count, rows } = await Operation.findAndCountAll({ 
-        order: [["name", "ASC"]],
-        limit,
-        offset
+    const operations = await prisma.operation.findMany({ 
+        orderBy: { name: "asc" },
+        skip: offset,
+        take: limit
     });
     return res.json({
-        data: rows,
+        data: operations,
         meta: {
-            total: count,
+            total: operations.length,
             page,
-            last_page: Math.ceil(count / limit),
+            last_page: Math.ceil(operations.length / limit),
         }
     });
   } catch (error: any) {
@@ -29,7 +29,9 @@ export const getAllOperations = async (req: Request, res: Response) => {
 export const getOperation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const operation = await Operation.findByPk(id);
+    const operation = await prisma.operation.findUnique({
+      where: { id: +(id || 0) }
+    });
     if (!operation) return res.status(404).json({ error: "Operation not found" });
     return res.json(operation);
   } catch (error: any) {
@@ -41,12 +43,14 @@ export const createOperation = async (req: Request, res: Response) => {
   try {
     const { name, operationCode, operationType, changeInventory, hasFinance } = req.body;
     
-    const operation = await Operation.create({
-      name,
-      operationCode,
-      operationType,
-      changeInventory,
-      hasFinance
+    const operation = await prisma.operation.create({
+      data: {
+        name,
+        operationCode,
+        operationType,
+        changeInventory,
+        hasFinance
+      }
     });
 
     return res.status(201).json(operation);
@@ -58,7 +62,9 @@ export const createOperation = async (req: Request, res: Response) => {
 export const updateOperation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const operation = await Operation.findByPk(id);
+    const operation = await prisma.operation.findUnique({
+      where: { id: +(id || 0) }
+    });
     
     if (!operation) return res.status(404).json({ error: "Operation not found" });
 
@@ -68,12 +74,15 @@ export const updateOperation = async (req: Request, res: Response) => {
 
     const { name, operationCode, operationType, changeInventory, hasFinance } = req.body;
 
-    await operation.update({
-      name,
-      operationCode,
-      operationType,
-      changeInventory,
-      hasFinance
+    await prisma.operation.update({
+      where: { id: +(id || 0) },
+      data: {
+        name,
+        operationCode,
+        operationType,
+        changeInventory,
+        hasFinance
+      }
     });
 
     return res.json(operation);
@@ -85,7 +94,9 @@ export const updateOperation = async (req: Request, res: Response) => {
 export const deleteOperation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const operation = await Operation.findByPk(id);
+    const operation = await prisma.operation.findUnique({
+      where: { id: +(id || 0) }
+    });
     
     if (!operation) return res.status(404).json({ error: "Operation not found" });
 
@@ -93,7 +104,9 @@ export const deleteOperation = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Forbidden" });
     }
 
-    await operation.destroy();
+    await prisma.operation.delete({
+      where: { id: +(id || 0) }
+    });
     return res.status(204).send();
   } catch (error: any) {
     return res.status(500).json({ error: error.message });

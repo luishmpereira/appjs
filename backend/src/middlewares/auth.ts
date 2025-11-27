@@ -1,17 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { User } from "../models/User";
-import { Role } from "../models/Role";
-import { defineAbilityFor, AppAbility } from "../config/abilities";
-
-declare global {
-  namespace Express {
-    interface Request {
-      user?: User;
-      ability?: AppAbility;
-    }
-  }
-}
+import { defineAbilityFor } from "../config/abilities";
+import prisma from "../config/database";
 
 export const authenticateJWT = async (
   req: Request,
@@ -27,13 +17,14 @@ export const authenticateJWT = async (
       id: number;
     };
 
-    const user = await User.findByPk(payload.id, {
-      include: [{ model: Role, as: "role" }],
+    const user = await prisma.user.findUnique({
+      where: { id: payload.id },
+      include: { role: true },
     });
     if (!user) return res.status(401).json({ error: "User not found" });
 
     req.user = user;
-    req.ability = defineAbilityFor(user);
+    req.ability = defineAbilityFor(user, user.role);
     next();
   } catch (err) {
     console.error(err);

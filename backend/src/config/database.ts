@@ -1,3 +1,10 @@
-import { Sequelize } from "sequelize";
+import { PrismaClient } from "../lib/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-export const sequelize = new Sequelize(process.env.DATABASE_URL!, { dialect: "postgres" });
+const connectionString = process.env.DATABASE_URL;
+
+const adapter = new PrismaPg({ connectionString });
+
+const prisma = new PrismaClient({ adapter });
+
+export default prisma;

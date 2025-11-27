@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { User } from "../models";
-import { Role } from "../models/Role";
+import prisma from "../config/database";
+import { User } from '../lib/prisma/client'
 import bcrypt from "bcryptjs";
 import { subject } from "@casl/ability";
 
@@ -10,26 +10,20 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const limit = parseInt(req.query.limit as string) || 10;
     const offset = (page - 1) * limit;
 
-    const { count, rows } = await User.findAndCountAll({
-      attributes: { exclude: ["password"] },
-      include: [{ model: Role, as: "role" }],
-      order: [["id", "ASC"]],
-      limit,
-      offset
+    const users = await prisma.user.findMany({
+      select: { id: true, name: true, email: true, role: { select: { name: true } } },
+      orderBy: { id: "asc" },
+      take: limit,
+      skip: offset
     });
-    // Flatten role for frontend compatibility if needed, or update frontend
-    const formattedUsers = rows.map(u => ({
-        ...u.toJSON(),
-        role: u.role?.name
-    }));
-    
+
     return res.json({
-        data: formattedUsers,
-        meta: {
-            total: count,
-            page,
-            last_page: Math.ceil(count / limit),
-        }
+      data: users,
+      meta: {
+        total: users.length,
+        page,
+        last_page: Math.ceil(users.length / limit),
+      }
     });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
@@ -40,22 +34,24 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password, role } = req.body;
 
-    const exists = await User.findOne({ where: { email } });
+    const exists = await prisma.user.findFirst({ where: { email } });
     if (exists) {
       return res.status(400).json({ error: "Email already exists" });
     }
-    
+
     // Look up role
-    const roleObj = await Role.findOne({ where: { name: role || "user" } });
+    const roleObj = await prisma.role.findFirst({ where: { name: role || "user" } });
     if (!roleObj) {
-         return res.status(400).json({ error: "Invalid role" });
+      return res.status(400).json({ error: "Invalid role" });
     }
 
-    const user = await User.create({ 
-        name, 
-        email, 
-        password, 
-        roleId: roleObj.id 
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password,
+        roleId: roleObj.id
+      }
     });
 
     return res.status(201).json({
@@ -74,39 +70,52 @@ export const updateUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, email, role, password, avatar } = req.body;
 
-    const user = await User.findByPk(id, { include: [{ model: Role, as: "role" }] });
+    const user = await prisma.user.findUnique({
+      where: {
+        id: +(id || 0)
+      }, 
+      include: { role: true }
+    });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Check permissions
-    // We use subject helper to tell CASL that this object is a "User" subject
     if (req.ability?.cannot("update", subject("User", user))) {
       return res.status(403).json({ error: "Forbidden" });
     }
 
     user.name = name || user.name;
     user.email = email || user.email;
-    
+
     if (avatar !== undefined) {
-        user.avatar = avatar;
+      user.avatar = avatar;
     }
-    
-    // Only admin can update role
-    if (role && (req.user as User)?.role?.name === "admin") {
-       const roleObj = await Role.findOne({ where: { name: role } });
-       if (roleObj) {
-           user.roleId = roleObj.id;
-           user.role = roleObj; // update loaded instance
-       }
+
+    const roleObj = await prisma.role.findFirst({ where: { id: user.roleId } });
+
+    if (role && roleObj?.name === "admin") {
+      const roleObj = await prisma.role.findFirst({ where: { name: role } });
+      if (roleObj) {
+        user.roleId = roleObj.id;
+        user.role = roleObj; 
+      }
     }
 
     if (password) {
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
     }
 
-    await user.save();
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        name: user.name,
+        email: user.email,
+        roleId: user.roleId,
+        avatar: user.avatar,
+        password: user.password,
+      }
+    });
 
     return res.json({
       id: user.id,
@@ -123,7 +132,11 @@ export const updateUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await User.findByPk(id);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: +(id || 0)
+      }
+    });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -133,7 +146,9 @@ export const deleteUser = async (req: Request, res: Response) => {
       return res.status(403).json({ error: "Forbidden" });
     }
 
-    await user.destroy();
+    await prisma.user.delete({
+      where: { id: user.id }
+    });
     return res.status(204).send();
   } catch (error: any) {
     return res.status(500).json({ error: error.message });

@@ -16,7 +16,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend/src:/app/src
-      - ./backend/migrations:/app/migrations
+      - ./backend/prisma:/app/prisma
     env_file:
       - .env
     ports:

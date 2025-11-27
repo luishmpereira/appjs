@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { User } from "../models";
+import { User } from "../lib/prisma/client";
+import prisma from '../config/database'
 import bcrypt from "bcryptjs";
 
 passport.use(
@@ -11,7 +12,7 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await User.findOne({ where: { email } });
+        const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return done(null, false, { message: "Invalid credentials" });
 
         const isValid = await bcrypt.compare(password, user.password);
