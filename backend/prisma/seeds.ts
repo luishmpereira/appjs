@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
-    const admin = await prisma.role.upsert({
+    await prisma.role.upsert({
         where: {
             name: 'admin'
         },
@@ -16,7 +16,8 @@ async function main() {
             permissions: [{ action: 'manage', subject: 'all' }],
         }
     });
-    const user = await prisma.role.upsert({
+    
+    await prisma.role.upsert({
         where: {
             name: 'user'
         },
@@ -29,8 +30,6 @@ async function main() {
             ],
         }
     });
-
-    console.log({admin, user});
 }
 main()
     .then(async () => {

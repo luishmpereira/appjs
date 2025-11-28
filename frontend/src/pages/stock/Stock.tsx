@@ -6,50 +6,27 @@ import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 import { Pagination } from "@/components/ui/pagination-controls";
-
-interface Movement {
-    id: number;
-    stockMovementCode: string;
-    movementDate: string;
-    movementType: "IN" | "OUT";
-    status: "DRAFT" | "CONFIRMED";
-    operationId: number;
-    createdAt: string;
-}
+import { useOperationStore } from "@/store/operationStore";
+import { useMovementStore } from "@/store/movementStore";
 
 export function Stock() {
     const navigate = useNavigate();
-    const [movements, setMovements] = useState<Movement[]>([]);
-    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const { movements, loading, fetchMovements, deleteMovement } = useMovementStore();
 
     useEffect(() => {
-        loadMovements();
+        fetchMovements();
     }, [page]);
-
-    const loadMovements = async () => {
-        try {
-            const { data } = await api.get(`/movements?page=${page}&limit=10`);
-            setMovements(data.data);
-            setTotalPages(data.meta.last_page);
-        } catch (error) {
-            console.error("Error loading movements:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleDelete = async (id: number) => {
         if (!confirm("Tem certeza que deseja excluir esta movimentação?")) return;
-
-        try {
-            await api.delete(`/movements/${id}`);
-            await loadMovements();
-        } catch (error: any) {
-            alert("Erro ao excluir: " + (error.response?.data?.error || error.message));
-        }
+        await deleteMovement(id);
     };
+
+    useEffect(() => {
+        console.log(movements)
+    }, [movements])
 
     return (
         <div>
@@ -85,24 +62,24 @@ export function Stock() {
                             ) : (
                                 movements.map((movement) => (
                                     <TableRow key={movement.id}>
-                                        <TableCell>{movement.stockMovementCode}</TableCell>
-                                        <TableCell>{new Date(movement.movementDate).toLocaleDateString()}</TableCell>
+                                        <TableCell>{null}</TableCell>
+                                        <TableCell>{new Date(movement.createdAt).toLocaleDateString()}</TableCell>
                                         <TableCell>
                                             <span className={`px-2 py-1 rounded text-xs font-medium ${
-                                                movement.movementType === 'IN' 
+                                                "IN" === 'IN' 
                                                     ? 'bg-green-100 text-green-800' 
                                                     : 'bg-red-100 text-red-800'
                                             }`}>
-                                                {movement.movementType === 'IN' ? 'ENTRADA' : 'SAÍDA'}
+                                                {"IN" === 'IN' ? 'ENTRADA' : 'SAÍDA'}
                                             </span>
                                         </TableCell>
                                         <TableCell>
                                             <span className={`px-2 py-1 rounded text-xs font-medium ${
-                                                movement.status === 'DRAFT' 
+                                                "DRAFT" === 'DRAFT' 
                                                     ? 'bg-gray-100 text-gray-800' 
                                                     : 'bg-blue-100 text-blue-800'
                                             }`}>
-                                                {movement.status === 'DRAFT' ? 'RASCUNHO' : 'CONFIRMADO'}
+                                                {"DRAFT" === 'DRAFT' ? 'RASCUNHO' : 'CONFIRMADO'}
                                             </span>
                                         </TableCell>
                                         <TableCell>{new Date(movement.createdAt).toLocaleString()}</TableCell>
@@ -111,7 +88,7 @@ export function Stock() {
                                                 <Button variant="ghost" size="sm" onClick={() => navigate(`/inventory/stock/${movement.id}`)}>
                                                     <Pencil />
                                                 </Button>
-                                                <Button variant="ghost" className="text-red-500 hover:text-red-600" size="sm" onClick={() => handleDelete(movement.id)}>
+                                                <Button variant="ghost" className="text-red-500 hover:text-red-600" size="sm" onClick={() => handleDelete(+movement.id)}>
                                                     <Trash2 />
                                                 </Button>
                                             </div>

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Movement, MovementLine, sequelize } from "../models";
+import prisma from "../config/database";
 
 export const getAllMovements = async (req: Request, res: Response) => {
     try {
@@ -7,17 +7,19 @@ export const getAllMovements = async (req: Request, res: Response) => {
         const limit = parseInt(req.query.limit as string) || 10;
         const offset = (page - 1) * limit;
 
-        const { count, rows } = await Movement.findAndCountAll({
-            order: [["createdAt", "DESC"]],
-            limit,
-            offset,
+        const movements = await prisma.movement.findMany({
+            orderBy: {
+                createdAt: "desc"
+            },
+            skip: offset,
+            take: limit,
         });
         return res.json({
-            data: rows,
+            data: movements,
             meta: {
-                total: count,
+                total: movements.length,
                 page,
-                last_page: Math.ceil(count / limit),
+                last_page: Math.ceil(movements.length / limit),
             }
         });
     } catch (error: any) {
@@ -27,11 +29,14 @@ export const getAllMovements = async (req: Request, res: Response) => {
 
 export const getMovement = async (req: Request, res: Response) => {
     try {
-        const movement = await Movement.findByPk(req.params.id, {
-            include: [{ association: "lines", include: ["product"] }]
+        const movement = await prisma.movement.findUnique({
+            where: {
+                id: +(req.params.id || 0)
+            },
+            select: { lines: { select: { product: true } } }
         });
         if (!movement) {
-            return res.status(404).json({ error: "Movement not found" });
+            return res.status(404).json({ error: "Movimento não encontrado" });
         }
         return res.json(movement);
     } catch (error: any) {
@@ -42,17 +47,30 @@ export const getMovement = async (req: Request, res: Response) => {
 export const createMovement = async (req: Request, res: Response) => {
     try {
         const { lines, ...movementData } = req.body;
-        
-        const movement = await Movement.create(
+
+        const movement = await prisma.movement.create(
             {
-                ...movementData,
-                lines: lines
-            },
-            {
-                include: [{ association: "lines" }]
+                data: {
+                    ...movementData,
+                    operationId: undefined,
+                    createdById: undefined,
+                    updatedById: undefined,
+                    createdBy: {
+                        connect: { id: movementData.createdBy }
+                    },
+                    updatedBy: {
+                        connect: { id: movementData.updatedBy }
+                    },
+                    lines: {
+                        create: lines
+                    },
+                    operation:{
+                        connect: { id: movementData.operationId }
+                    }
+                } 
             }
         );
-        
+
         return res.json(movement);
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
@@ -60,56 +78,36 @@ export const createMovement = async (req: Request, res: Response) => {
 };
 
 export const updateMovement = async (req: Request, res: Response) => {
-    const t = await sequelize.transaction();
     try {
-        const movement = await Movement.findByPk(req.params.id);
-        if (!movement) {
-            await t.rollback();
-            return res.status(404).json({ error: "Movement not found" });
-        }
-
         const { lines, ...movementData } = req.body;
-
-        await movement.update(movementData, { transaction: t });
-
-        if (lines && Array.isArray(lines)) {
-            // Destroy existing lines
-            await MovementLine.destroy({
-                where: { movementId: movement.id },
-                transaction: t
-            });
-
-            // Create new lines
-            for (const line of lines) {
-                await MovementLine.create({
-                    ...line,
-                    movementId: movement.id
-                }, { transaction: t });
-            }
-        }
-
-        await t.commit();
-        
-        // Refetch to return complete object
-        const updatedMovement = await Movement.findByPk(movement.id, {
-            include: [{ association: "lines" }]
-        });
-        
-        return res.json(updatedMovement);
+        const t = await prisma.$transaction([
+            prisma.movement.update({
+                where: { id: +(req.params.id || 0) },
+                    data: {
+                    ...movementData,
+                    lines: {
+                        create: lines
+                    }
+                }
+            }),
+        ]);
     } catch (error: any) {
-        await t.rollback();
         return res.status(500).json({ error: error.message });
     }
 };
 
 export const deleteMovement = async (req: Request, res: Response) => {
     try {
-        const movement = await Movement.findByPk(req.params.id);
+        const movement = await prisma.movement.findUnique({
+            where: { id: +(req.params.id || 0) }
+        });
         if (!movement) {
-            return res.status(404).json({ error: "Movement not found" });
+            return res.status(404).json({ error: "Movimento não encontrado" });
         }
-        await movement.destroy();
-        return res.json({ message: "Movement deleted" });
+        await prisma.movement.delete({
+            where: { id: +(req.params.id || 0) }
+        });
+        return res.json({ message: "Movimento deletado" });
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
     }

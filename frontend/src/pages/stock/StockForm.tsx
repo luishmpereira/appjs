@@ -7,69 +7,72 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useOperationStore } from "@/store/operationStore";
+import { useProductStore } from "@/store/productStore";
+import { useMovementStore } from "@/store/movementStore";
 
 interface Product {
     id: number;
     name: string;
-    price: string | number;
+    price: number;
     stockQuantity: number;
+    createdAt: string;
+    updatedAt: string;
 }
 
-interface Operation {
-    id: number;
-    name: string;
-    operationCode: string;
-    operationType: "IN" | "OUT";
-}
 
 interface MovementLine {
+    id: string;
+    movementId: number;
     productId: number;
-    productName: string;
     quantity: number;
+    price: number;
+}
+
+interface Movement {
+    id: number;
+    operationId: number;
+    createdById: number;
+    updatedById: number;
+    createdAt: Date;
+    updatedAt: Date;
+    lines: MovementLine[];
 }
 
 export function StockForm() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
-    const [operations, setOperations] = useState<Operation[]>([]);
-    const [products, setProducts] = useState<Product[]>([]);
-    
-    // Form State
+    const { operations, fetchOperations } = useOperationStore();
+    const { products, fetchProducts } = useProductStore();
+    const { getMovement } = useMovementStore();
+    const [error, setError] = useState();
+    const [movement, setMovement] = useState<Movement | undefined>(undefined);
     const [selectedOperationId, setSelectedOperationId] = useState<string>("");
     const [movementDate, setMovementDate] = useState<string>(new Date().toISOString().split('T')[0]);
     
-    // Line State
     const [searchQuery, setSearchQuery] = useState("");
     const [quantity, setQuantity] = useState<string>("1");
     const [lines, setLines] = useState<MovementLine[]>([]);
 
-    // Load Data
     useEffect(() => {
-        api.get("/operations").then(res => setOperations(res.data)).catch(console.error);
-        api.get("/products").then(res => setProducts(res.data)).catch(console.error);
+        fetchOperations(1);
+        fetchProducts();
     }, []);
 
-    // Load Movement if ID is present
     useEffect(() => {
-        if (id) {
-            api.get(`/movements/${id}`).then(res => {
-                const movement = res.data;
-                setSelectedOperationId(movement.operationId.toString());
-                setMovementDate(new Date(movement.movementDate).toISOString().split('T')[0]);
-                
-                const mappedLines = movement.lines.map((l: any) => ({
-                    productId: l.productId,
-                    productName: l.product?.name || `Produto ${l.productId}`, // Fallback if product not expanded properly
-                    quantity: l.quantity
-                }));
-                setLines(mappedLines);
-            }).catch(error => {
-                console.error(error);
-                alert("Erro ao carregar movimentação");
-                navigate("/inventory/stock");
-            });
+        async function loadMovement() {
+            if (id) {
+                const movement = await getMovement(parseInt(id));
+                if (movement) {
+                    setMovement(movement);
+                    setSelectedOperationId(movement.operationId.toString());
+                    setMovementDate(movement.createdAt.toISOString().split('T')[0]);
+                    setLines(movement.lines);
+                }
+            }
         }
+        loadMovement();
     }, [id, navigate]);
 
     // Handlers
@@ -79,8 +82,11 @@ export function StockForm() {
         
         setLines([...lines, {
             productId: product.id,
-            productName: product.name,
-            quantity: qty
+            price: product.price,
+            
+            quantity: qty,
+            movementId: movement?.id || 0,
+            id: movement?.id ? `${movement.id}-${lines.length + 1}` : `${lines.length + 1}`
         }]);
         
         // Reset
@@ -112,10 +118,7 @@ export function StockForm() {
         if (!operation) return;
 
         const payload = {
-            stockMovementCode: id ? undefined : `MV-${Date.now()}`,
             movementDate: new Date(movementDate),
-            movementType: operation.operationType,
-            status: "DRAFT",
             operationId: parseInt(selectedOperationId),
             updatedBy: user.id,
             createdBy: id ? undefined : user.id,
@@ -137,6 +140,7 @@ export function StockForm() {
         } catch (error: any) {
             console.error(error);
             alert("Erro ao salvar rascunho: " + (error.response?.data?.error || error.message));
+            setError(error.response?.data?.error || error.message);
         }
     };
 
@@ -158,7 +162,6 @@ export function StockForm() {
         if (!operation) return;
 
         const payload = {
-            stockMovementCode: id ? undefined : `MV-${Date.now()}`, // Only generated on create
             movementDate: new Date(movementDate),
             movementType: operation.operationType,
             status: "CONFIRMED",
@@ -254,7 +257,7 @@ export function StockForm() {
                                                 className="p-2 hover:bg-accent cursor-pointer text-sm"
                                                 onClick={() => handleAddLine(product)}
                                             >
-                                                {product.name} (Estoque: {product.stockQuantity})
+                                                {product.name} (Estoque: 0)
                                             </div>
                                         ))}
                                     </div>
@@ -304,7 +307,7 @@ export function StockForm() {
                             ) : (
                                 lines.map((line, index) => (
                                     <TableRow key={index}>
-                                        <TableCell>{line.productName}</TableCell>
+                                        <TableCell>{line.id}</TableCell>
                                         <TableCell>{line.quantity}</TableCell>
                                         <TableCell>
                                             <Button 
@@ -331,6 +334,9 @@ export function StockForm() {
                 <Button onClick={handleConfirm}>
                     {id ? "Salvar Alterações" : "Confirmar Movimento"}
                 </Button>
+            </div>
+            <div>
+                <p style={{ whiteSpace: "break-spaces" }}>{error}</p>
             </div>
         </div>
     )

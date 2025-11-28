@@ -51,10 +51,8 @@ model Movement {
   id           Int            @id @default(autoincrement())
   lines        MovementLine[]
   movementDate DateTime       @default(now())
-  quantity     Int
   operationId  Int
   operation    Operation      @relation(fields: [operationId], references: [id])
-  type         String
   createdBy    User           @relation(fields: [createdById], references: [id], name: "createdBy")
   createdById  Int
   updatedBy    User           @relation(fields: [updatedById], references: [id], name: "updatedBy")

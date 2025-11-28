@@ -116,9 +116,7 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const MovementScalarFieldEnum = {
   id: 'id',
   movementDate: 'movementDate',
-  quantity: 'quantity',
   operationId: 'operationId',
-  type: 'type',
   createdById: 'createdById',
   updatedById: 'updatedById',
   createdAt: 'createdAt',

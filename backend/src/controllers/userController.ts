@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import prisma from "../config/database";
-import { User } from '../lib/prisma/client'
 import bcrypt from "bcryptjs";
 import { subject } from "@casl/ability";
 
@@ -16,9 +15,15 @@ export const getAllUsers = async (req: Request, res: Response) => {
       take: limit,
       skip: offset
     });
+    console.log(users)
 
     return res.json({
-      data: users,
+      data: users.map(user => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role.name
+      })),
       meta: {
         total: users.length,
         page,
@@ -39,7 +44,6 @@ export const createUser = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    // Look up role
     const roleObj = await prisma.role.findFirst({ where: { name: role || "user" } });
     if (!roleObj) {
       return res.status(400).json({ error: "Invalid role" });

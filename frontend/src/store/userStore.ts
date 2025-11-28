@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { api } from "@/lib/axios";
 
-
 interface User {
   id: number;
   name: string;

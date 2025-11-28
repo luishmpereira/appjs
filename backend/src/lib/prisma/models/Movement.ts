@@ -28,7 +28,6 @@ export type AggregateMovement = {
 
 export type MovementAvgAggregateOutputType = {
   id: number | null
-  quantity: number | null
   operationId: number | null
   createdById: number | null
   updatedById: number | null
@@ -36,7 +35,6 @@ export type MovementAvgAggregateOutputType = {
 
 export type MovementSumAggregateOutputType = {
   id: number | null
-  quantity: number | null
   operationId: number | null
   createdById: number | null
   updatedById: number | null
@@ -45,9 +43,7 @@ export type MovementSumAggregateOutputType = {
 export type MovementMinAggregateOutputType = {
   id: number | null
   movementDate: Date | null
-  quantity: number | null
   operationId: number | null
-  type: string | null
   createdById: number | null
   updatedById: number | null
   createdAt: Date | null
@@ -57,9 +53,7 @@ export type MovementMinAggregateOutputType = {
 export type MovementMaxAggregateOutputType = {
   id: number | null
   movementDate: Date | null
-  quantity: number | null
   operationId: number | null
-  type: string | null
   createdById: number | null
   updatedById: number | null
   createdAt: Date | null
@@ -69,9 +63,7 @@ export type MovementMaxAggregateOutputType = {
 export type MovementCountAggregateOutputType = {
   id: number
   movementDate: number
-  quantity: number
   operationId: number
-  type: number
   createdById: number
   updatedById: number
   createdAt: number
@@ -82,7 +74,6 @@ export type MovementCountAggregateOutputType = {
 
 export type MovementAvgAggregateInputType = {
   id?: true
-  quantity?: true
   operationId?: true
   createdById?: true
   updatedById?: true
@@ -90,7 +81,6 @@ export type MovementAvgAggregateInputType = {
 
 export type MovementSumAggregateInputType = {
   id?: true
-  quantity?: true
   operationId?: true
   createdById?: true
   updatedById?: true
@@ -99,9 +89,7 @@ export type MovementSumAggregateInputType = {
 export type MovementMinAggregateInputType = {
   id?: true
   movementDate?: true
-  quantity?: true
   operationId?: true
-  type?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
@@ -111,9 +99,7 @@ export type MovementMinAggregateInputType = {
 export type MovementMaxAggregateInputType = {
   id?: true
   movementDate?: true
-  quantity?: true
   operationId?: true
-  type?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
@@ -123,9 +109,7 @@ export type MovementMaxAggregateInputType = {
 export type MovementCountAggregateInputType = {
   id?: true
   movementDate?: true
-  quantity?: true
   operationId?: true
-  type?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
@@ -222,9 +206,7 @@ export type MovementGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type MovementGroupByOutputType = {
   id: number
   movementDate: Date
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   updatedById: number
   createdAt: Date
@@ -257,9 +239,7 @@ export type MovementWhereInput = {
   NOT?: Prisma.MovementWhereInput | Prisma.MovementWhereInput[]
   id?: Prisma.IntFilter<"Movement"> | number
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
-  quantity?: Prisma.IntFilter<"Movement"> | number
   operationId?: Prisma.IntFilter<"Movement"> | number
-  type?: Prisma.StringFilter<"Movement"> | string
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
@@ -273,9 +253,7 @@ export type MovementWhereInput = {
 export type MovementOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -292,9 +270,7 @@ export type MovementWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MovementWhereInput[]
   NOT?: Prisma.MovementWhereInput | Prisma.MovementWhereInput[]
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
-  quantity?: Prisma.IntFilter<"Movement"> | number
   operationId?: Prisma.IntFilter<"Movement"> | number
-  type?: Prisma.StringFilter<"Movement"> | string
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
@@ -308,9 +284,7 @@ export type MovementWhereUniqueInput = Prisma.AtLeast<{
 export type MovementOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -328,9 +302,7 @@ export type MovementScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MovementScalarWhereWithAggregatesInput | Prisma.MovementScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   movementDate?: Prisma.DateTimeWithAggregatesFilter<"Movement"> | Date | string
-  quantity?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   operationId?: Prisma.IntWithAggregatesFilter<"Movement"> | number
-  type?: Prisma.StringWithAggregatesFilter<"Movement"> | string
   createdById?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   updatedById?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Movement"> | Date | string
@@ -339,8 +311,6 @@ export type MovementScalarWhereWithAggregatesInput = {
 
 export type MovementCreateInput = {
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
@@ -352,9 +322,7 @@ export type MovementCreateInput = {
 export type MovementUncheckedCreateInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   updatedById: number
   createdAt?: Date | string
@@ -364,8 +332,6 @@ export type MovementUncheckedCreateInput = {
 
 export type MovementUpdateInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
@@ -377,9 +343,7 @@ export type MovementUpdateInput = {
 export type MovementUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -390,9 +354,7 @@ export type MovementUncheckedUpdateInput = {
 export type MovementCreateManyInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   updatedById: number
   createdAt?: Date | string
@@ -401,8 +363,6 @@ export type MovementCreateManyInput = {
 
 export type MovementUpdateManyMutationInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -410,9 +370,7 @@ export type MovementUpdateManyMutationInput = {
 export type MovementUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,9 +390,7 @@ export type MovementOrderByRelationAggregateInput = {
 export type MovementCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -443,7 +399,6 @@ export type MovementCountOrderByAggregateInput = {
 
 export type MovementAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -452,9 +407,7 @@ export type MovementAvgOrderByAggregateInput = {
 export type MovementMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -464,9 +417,7 @@ export type MovementMaxOrderByAggregateInput = {
 export type MovementMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -475,7 +426,6 @@ export type MovementMinOrderByAggregateInput = {
 
 export type MovementSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -628,8 +578,6 @@ export type MovementUncheckedUpdateManyWithoutOperationNestedInput = {
 
 export type MovementCreateWithoutCreatedByInput = {
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
@@ -640,9 +588,7 @@ export type MovementCreateWithoutCreatedByInput = {
 export type MovementUncheckedCreateWithoutCreatedByInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -661,8 +607,6 @@ export type MovementCreateManyCreatedByInputEnvelope = {
 
 export type MovementCreateWithoutUpdatedByInput = {
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
@@ -673,9 +617,7 @@ export type MovementCreateWithoutUpdatedByInput = {
 export type MovementUncheckedCreateWithoutUpdatedByInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -714,9 +656,7 @@ export type MovementScalarWhereInput = {
   NOT?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
   id?: Prisma.IntFilter<"Movement"> | number
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
-  quantity?: Prisma.IntFilter<"Movement"> | number
   operationId?: Prisma.IntFilter<"Movement"> | number
-  type?: Prisma.StringFilter<"Movement"> | string
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
@@ -741,8 +681,6 @@ export type MovementUpdateManyWithWhereWithoutUpdatedByInput = {
 
 export type MovementCreateWithoutLinesInput = {
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdAt?: Date | string
   updatedAt?: Date | string
   operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
@@ -753,9 +691,7 @@ export type MovementCreateWithoutLinesInput = {
 export type MovementUncheckedCreateWithoutLinesInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   updatedById: number
   createdAt?: Date | string
@@ -780,8 +716,6 @@ export type MovementUpdateToOneWithWhereWithoutLinesInput = {
 
 export type MovementUpdateWithoutLinesInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
@@ -792,9 +726,7 @@ export type MovementUpdateWithoutLinesInput = {
 export type MovementUncheckedUpdateWithoutLinesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -803,8 +735,6 @@ export type MovementUncheckedUpdateWithoutLinesInput = {
 
 export type MovementCreateWithoutOperationInput = {
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
@@ -815,8 +745,6 @@ export type MovementCreateWithoutOperationInput = {
 export type MovementUncheckedCreateWithoutOperationInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdById: number
   updatedById: number
   createdAt?: Date | string
@@ -853,9 +781,7 @@ export type MovementUpdateManyWithWhereWithoutOperationInput = {
 export type MovementCreateManyCreatedByInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -864,9 +790,7 @@ export type MovementCreateManyCreatedByInput = {
 export type MovementCreateManyUpdatedByInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
   operationId: number
-  type: string
   createdById: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -874,8 +798,6 @@ export type MovementCreateManyUpdatedByInput = {
 
 export type MovementUpdateWithoutCreatedByInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
@@ -886,9 +808,7 @@ export type MovementUpdateWithoutCreatedByInput = {
 export type MovementUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -898,9 +818,7 @@ export type MovementUncheckedUpdateWithoutCreatedByInput = {
 export type MovementUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -908,8 +826,6 @@ export type MovementUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type MovementUpdateWithoutUpdatedByInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
@@ -920,9 +836,7 @@ export type MovementUpdateWithoutUpdatedByInput = {
 export type MovementUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -932,9 +846,7 @@ export type MovementUncheckedUpdateWithoutUpdatedByInput = {
 export type MovementUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -943,8 +855,6 @@ export type MovementUncheckedUpdateManyWithoutUpdatedByInput = {
 export type MovementCreateManyOperationInput = {
   id?: number
   movementDate?: Date | string
-  quantity: number
-  type: string
   createdById: number
   updatedById: number
   createdAt?: Date | string
@@ -953,8 +863,6 @@ export type MovementCreateManyOperationInput = {
 
 export type MovementUpdateWithoutOperationInput = {
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
@@ -965,8 +873,6 @@ export type MovementUpdateWithoutOperationInput = {
 export type MovementUncheckedUpdateWithoutOperationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -977,8 +883,6 @@ export type MovementUncheckedUpdateWithoutOperationInput = {
 export type MovementUncheckedUpdateManyWithoutOperationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1019,9 +923,7 @@ export type MovementCountOutputTypeCountLinesArgs<ExtArgs extends runtime.Types.
 export type MovementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   movementDate?: boolean
-  quantity?: boolean
   operationId?: boolean
-  type?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
@@ -1036,9 +938,7 @@ export type MovementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type MovementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   movementDate?: boolean
-  quantity?: boolean
   operationId?: boolean
-  type?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
@@ -1051,9 +951,7 @@ export type MovementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MovementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   movementDate?: boolean
-  quantity?: boolean
   operationId?: boolean
-  type?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
@@ -1066,16 +964,14 @@ export type MovementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MovementSelectScalar = {
   id?: boolean
   movementDate?: boolean
-  quantity?: boolean
   operationId?: boolean
-  type?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MovementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "movementDate" | "quantity" | "operationId" | "type" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["movement"]>
+export type MovementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "movementDate" | "operationId" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["movement"]>
 export type MovementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lines?: boolean | Prisma.Movement$linesArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
@@ -1105,9 +1001,7 @@ export type $MovementPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     movementDate: Date
-    quantity: number
     operationId: number
-    type: string
     createdById: number
     updatedById: number
     createdAt: Date
@@ -1541,9 +1435,7 @@ export interface Prisma__MovementClient<T, Null = never, ExtArgs extends runtime
 export interface MovementFieldRefs {
   readonly id: Prisma.FieldRef<"Movement", 'Int'>
   readonly movementDate: Prisma.FieldRef<"Movement", 'DateTime'>
-  readonly quantity: Prisma.FieldRef<"Movement", 'Int'>
   readonly operationId: Prisma.FieldRef<"Movement", 'Int'>
-  readonly type: Prisma.FieldRef<"Movement", 'String'>
   readonly createdById: Prisma.FieldRef<"Movement", 'Int'>
   readonly updatedById: Prisma.FieldRef<"Movement", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Movement", 'DateTime'>
