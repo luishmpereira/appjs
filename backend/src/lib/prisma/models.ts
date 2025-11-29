@@ -10,8 +10,10 @@
  */
 export type * from './models/User'
 export type * from './models/Role'
+export type * from './models/Contact'
 export type * from './models/Product'
 export type * from './models/Movement'
 export type * from './models/MovementLine'
 export type * from './models/Operation'
+export type * from './models/UserActivity'
 export type * from './commonInputTypes'

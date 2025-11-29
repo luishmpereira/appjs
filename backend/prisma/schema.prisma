@@ -21,8 +21,10 @@ model User {
   avatar           String?
   roleId           Int
   role             Role       @relation(fields: [roleId], references: [id])
+  customers        Contact[]
   createdMovements Movement[] @relation("createdBy")
   updatedMovements Movement[] @relation("updatedBy")
+  activities       UserActivity[]
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 }
@@ -34,6 +36,17 @@ model Role {
   permissions Json
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  sellerId  Int
+  seller    User     @relation(fields: [sellerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -82,4 +95,13 @@ model Operation {
   movements       Movement[]
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+}
+
+model UserActivity {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

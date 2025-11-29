@@ -1,16 +1,6 @@
 import { create } from "zustand";
 import { api } from "@/lib/axios";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface ProductState {
   products: Product[];
   loading: boolean;

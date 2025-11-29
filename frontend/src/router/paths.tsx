@@ -39,5 +39,9 @@ export const paths: Path[] = [
     {
         path: "/checkout",
         label: "Caixa",
+    },
+    {
+        path: "/sales",
+        label: "Vendas",
     }
 ];

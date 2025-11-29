@@ -1,15 +1,6 @@
 import { create } from "zustand";
 import { api } from "@/lib/axios";
 
-interface Operation {
-    id: number;
-    name: string;
-    operationCode: string;
-    changeInventory: boolean;
-    hasFinance: boolean;
-    operationType: string;
-}
-
 interface OpertationState {
     operations: Operation[];
     fetchOperations: (page: number) => Promise<void>;

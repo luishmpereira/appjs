@@ -245,8 +245,10 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
+  customers?: Prisma.ContactListRelationFilter
   createdMovements?: Prisma.MovementListRelationFilter
   updatedMovements?: Prisma.MovementListRelationFilter
+  activities?: Prisma.UserActivityListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -259,8 +261,10 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   role?: Prisma.RoleOrderByWithRelationInput
+  customers?: Prisma.ContactOrderByRelationAggregateInput
   createdMovements?: Prisma.MovementOrderByRelationAggregateInput
   updatedMovements?: Prisma.MovementOrderByRelationAggregateInput
+  activities?: Prisma.UserActivityOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -276,8 +280,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
+  customers?: Prisma.ContactListRelationFilter
   createdMovements?: Prisma.MovementListRelationFilter
   updatedMovements?: Prisma.MovementListRelationFilter
+  activities?: Prisma.UserActivityListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -318,8 +324,10 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  customers?: Prisma.ContactCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementCreateNestedManyWithoutCreatedByInput
   updatedMovements?: Prisma.MovementCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -331,8 +339,10 @@ export type UserUncheckedCreateInput = {
   roleId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  customers?: Prisma.ContactUncheckedCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutCreatedByInput
   updatedMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -343,8 +353,10 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  customers?: Prisma.ContactUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUpdateManyWithoutCreatedByNestedInput
   updatedMovements?: Prisma.MovementUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -356,8 +368,10 @@ export type UserUncheckedUpdateInput = {
   roleId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUncheckedUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedMovements?: Prisma.MovementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -511,6 +525,20 @@ export type UserUncheckedUpdateManyWithoutRoleNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutCustomersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCustomersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomersInput
+  upsert?: Prisma.UserUpsertWithoutCustomersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomersInput, Prisma.UserUpdateWithoutCustomersInput>, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+}
+
 export type UserCreateNestedOneWithoutCreatedMovementsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedMovementsInput, Prisma.UserUncheckedCreateWithoutCreatedMovementsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedMovementsInput
@@ -539,6 +567,20 @@ export type UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedMovementsInput, Prisma.UserUpdateWithoutUpdatedMovementsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedMovementsInput>
 }
 
+export type UserCreateNestedOneWithoutActivitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActivitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActivitiesInput
+  upsert?: Prisma.UserUpsertWithoutActivitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActivitiesInput, Prisma.UserUpdateWithoutActivitiesInput>, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+}
+
 export type UserCreateWithoutRoleInput = {
   email: string
   name: string
@@ -546,8 +588,10 @@ export type UserCreateWithoutRoleInput = {
   avatar?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  customers?: Prisma.ContactCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementCreateNestedManyWithoutCreatedByInput
   updatedMovements?: Prisma.MovementCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoleInput = {
@@ -558,8 +602,10 @@ export type UserUncheckedCreateWithoutRoleInput = {
   avatar?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  customers?: Prisma.ContactUncheckedCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutCreatedByInput
   updatedMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoleInput = {
@@ -602,6 +648,76 @@ export type UserScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
+export type UserCreateWithoutCustomersInput = {
+  email: string
+  name: string
+  password: string
+  avatar?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  createdMovements?: Prisma.MovementCreateNestedManyWithoutCreatedByInput
+  updatedMovements?: Prisma.MovementCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCustomersInput = {
+  id?: number
+  email: string
+  name: string
+  password: string
+  avatar?: string | null
+  roleId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCustomersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+}
+
+export type UserUpsertWithoutCustomersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCustomersInput, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCustomersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCustomersInput, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+}
+
+export type UserUpdateWithoutCustomersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  createdMovements?: Prisma.MovementUpdateManyWithoutCreatedByNestedInput
+  updatedMovements?: Prisma.MovementUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCustomersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdMovements?: Prisma.MovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMovements?: Prisma.MovementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutCreatedMovementsInput = {
   email: string
   name: string
@@ -610,7 +726,9 @@ export type UserCreateWithoutCreatedMovementsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  customers?: Prisma.ContactCreateNestedManyWithoutSellerInput
   updatedMovements?: Prisma.MovementCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedMovementsInput = {
@@ -622,7 +740,9 @@ export type UserUncheckedCreateWithoutCreatedMovementsInput = {
   roleId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  customers?: Prisma.ContactUncheckedCreateNestedManyWithoutSellerInput
   updatedMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutUpdatedByInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedMovementsInput = {
@@ -638,7 +758,9 @@ export type UserCreateWithoutUpdatedMovementsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  customers?: Prisma.ContactCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedMovementsInput = {
@@ -650,7 +772,9 @@ export type UserUncheckedCreateWithoutUpdatedMovementsInput = {
   roleId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  customers?: Prisma.ContactUncheckedCreateNestedManyWithoutSellerInput
   createdMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedMovementsInput = {
@@ -677,7 +801,9 @@ export type UserUpdateWithoutCreatedMovementsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  customers?: Prisma.ContactUpdateManyWithoutSellerNestedInput
   updatedMovements?: Prisma.MovementUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedMovementsInput = {
@@ -689,7 +815,9 @@ export type UserUncheckedUpdateWithoutCreatedMovementsInput = {
   roleId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUncheckedUpdateManyWithoutSellerNestedInput
   updatedMovements?: Prisma.MovementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutUpdatedMovementsInput = {
@@ -711,7 +839,9 @@ export type UserUpdateWithoutUpdatedMovementsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  customers?: Prisma.ContactUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedMovementsInput = {
@@ -723,7 +853,79 @@ export type UserUncheckedUpdateWithoutUpdatedMovementsInput = {
   roleId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUncheckedUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutActivitiesInput = {
+  email: string
+  name: string
+  password: string
+  avatar?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput
+  customers?: Prisma.ContactCreateNestedManyWithoutSellerInput
+  createdMovements?: Prisma.MovementCreateNestedManyWithoutCreatedByInput
+  updatedMovements?: Prisma.MovementCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutActivitiesInput = {
+  id?: number
+  email: string
+  name: string
+  password: string
+  avatar?: string | null
+  roleId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customers?: Prisma.ContactUncheckedCreateNestedManyWithoutSellerInput
+  createdMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMovements?: Prisma.MovementUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+}
+
+export type UserUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutActivitiesInput, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutActivitiesInput, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type UserUpdateWithoutActivitiesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput
+  customers?: Prisma.ContactUpdateManyWithoutSellerNestedInput
+  createdMovements?: Prisma.MovementUpdateManyWithoutCreatedByNestedInput
+  updatedMovements?: Prisma.MovementUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUncheckedUpdateManyWithoutSellerNestedInput
+  createdMovements?: Prisma.MovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMovements?: Prisma.MovementUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyRoleInput = {
@@ -743,8 +945,10 @@ export type UserUpdateWithoutRoleInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUpdateManyWithoutCreatedByNestedInput
   updatedMovements?: Prisma.MovementUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoleInput = {
@@ -755,8 +959,10 @@ export type UserUncheckedUpdateWithoutRoleInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customers?: Prisma.ContactUncheckedUpdateManyWithoutSellerNestedInput
   createdMovements?: Prisma.MovementUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedMovements?: Prisma.MovementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -775,13 +981,17 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
  */
 
 export type UserCountOutputType = {
+  customers: number
   createdMovements: number
   updatedMovements: number
+  activities: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  customers?: boolean | UserCountOutputTypeCountCustomersArgs
   createdMovements?: boolean | UserCountOutputTypeCountCreatedMovementsArgs
   updatedMovements?: boolean | UserCountOutputTypeCountUpdatedMovementsArgs
+  activities?: boolean | UserCountOutputTypeCountActivitiesArgs
 }
 
 /**
@@ -792,6 +1002,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactWhereInput
 }
 
 /**
@@ -808,6 +1025,13 @@ export type UserCountOutputTypeCountUpdatedMovementsArgs<ExtArgs extends runtime
   where?: Prisma.MovementWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserActivityWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -819,8 +1043,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  customers?: boolean | Prisma.User$customersArgs<ExtArgs>
   createdMovements?: boolean | Prisma.User$createdMovementsArgs<ExtArgs>
   updatedMovements?: boolean | Prisma.User$updatedMovementsArgs<ExtArgs>
+  activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -862,8 +1088,10 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "avatar" | "roleId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
+  customers?: boolean | Prisma.User$customersArgs<ExtArgs>
   createdMovements?: boolean | Prisma.User$createdMovementsArgs<ExtArgs>
   updatedMovements?: boolean | Prisma.User$updatedMovementsArgs<ExtArgs>
+  activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -877,8 +1105,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     role: Prisma.$RolePayload<ExtArgs>
+    customers: Prisma.$ContactPayload<ExtArgs>[]
     createdMovements: Prisma.$MovementPayload<ExtArgs>[]
     updatedMovements: Prisma.$MovementPayload<ExtArgs>[]
+    activities: Prisma.$UserActivityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1284,8 +1514,10 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   role<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  customers<T extends Prisma.User$customersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdMovements<T extends Prisma.User$createdMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedMovements<T extends Prisma.User$updatedMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1719,6 +1951,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.customers
+ */
+export type User$customersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
+  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
+  cursor?: Prisma.ContactWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
+}
+
+/**
  * User.createdMovements
  */
 export type User$createdMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1764,6 +2020,30 @@ export type User$updatedMovementsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.MovementScalarFieldEnum | Prisma.MovementScalarFieldEnum[]
+}
+
+/**
+ * User.activities
+ */
+export type User$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserActivity
+   */
+  select?: Prisma.UserActivitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserActivity
+   */
+  omit?: Prisma.UserActivityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserActivityInclude<ExtArgs> | null
+  where?: Prisma.UserActivityWhereInput
+  orderBy?: Prisma.UserActivityOrderByWithRelationInput | Prisma.UserActivityOrderByWithRelationInput[]
+  cursor?: Prisma.UserActivityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserActivityScalarFieldEnum | Prisma.UserActivityScalarFieldEnum[]
 }
 
 /**

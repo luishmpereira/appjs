@@ -16,6 +16,7 @@ import { StockForm } from "@/pages/stock/StockForm";
 import { Operations } from "@/pages/operations/Operations";
 import { OperationForm } from "@/pages/operations/OperationForm";
 import { Checkout } from "@/pages/checkout/Checout";
+import { Sales } from "@/pages/sales/Sales";
 
 export const router = createBrowserRouter([
     {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <Checkout />,
+            },
+            {
+                path: "/sales",
+                element: <Sales />,
             }
         ],
     },

@@ -48,6 +48,11 @@ export type User = Prisma.UserModel
  */
 export type Role = Prisma.RoleModel
 /**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
  * Model Product
  * 
  */
@@ -67,3 +72,8 @@ export type MovementLine = Prisma.MovementLineModel
  * 
  */
 export type Operation = Prisma.OperationModel
+/**
+ * Model UserActivity
+ * 
+ */
+export type UserActivity = Prisma.UserActivityModel

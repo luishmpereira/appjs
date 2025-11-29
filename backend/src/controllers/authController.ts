@@ -55,6 +55,13 @@ export const login = async (req: Request, res: Response) => {
   const role = await prisma.role.findFirst({ where: { id: user.roleId } });
   const roleName = role?.name || "user";
 
+  await prisma.userActivity.create({
+    data: {
+      message: `${user.name} fez login.`,
+      userId: user.id,
+    }
+  });
+
   return res.json({
     message: "Logged in",
     user: {

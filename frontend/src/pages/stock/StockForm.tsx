@@ -283,7 +283,6 @@ export function StockForm() {
                 </Card>
             </div>
 
-            {/* Lines Table */}
             <Card>
                 <CardHeader>
                     <CardTitle>Itens do Movimento</CardTitle>

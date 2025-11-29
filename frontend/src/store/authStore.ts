@@ -1,15 +1,6 @@
 import { create } from "zustand";
 import { api } from "@/lib/axios";
 
-// Expanded User interface to support role objects
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: string | { name: string; permissions?: any[] }; // Adapt as needed
-  avatar?: string;
-}
-
 interface AuthState {
   user: User | null;
   loading: boolean;
