@@ -43,5 +43,9 @@ export const paths: Path[] = [
     {
         path: "/sales",
         label: "Vendas",
+    },
+    {
+        path: "/contacts",
+        label: "Contatos",
     }
 ];

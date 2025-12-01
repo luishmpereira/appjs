@@ -17,6 +17,7 @@ import { Operations } from "@/pages/operations/Operations";
 import { OperationForm } from "@/pages/operations/OperationForm";
 import { Checkout } from "@/pages/checkout/Checout";
 import { Sales } from "@/pages/sales/Sales";
+import Contacts from "@/pages/contacts/Contacts";
 
 export const router = createBrowserRouter([
     {
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
             {
                 path: "/sales",
                 element: <Sales />,
+            },
+            {
+                path: "/contacts",
+                element: <Contacts />,
             }
         ],
     },

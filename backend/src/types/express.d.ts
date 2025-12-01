@@ -1,4 +1,4 @@
-import { users as User } from "../lib/prisma";
+import { User } from "../lib/prisma/client";
 import { MongoAbility } from "@casl/ability";
 
 declare global {
@@ -10,4 +10,4 @@ declare global {
   }
 }
 
-export {};
+export { };
