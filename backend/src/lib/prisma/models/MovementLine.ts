@@ -31,6 +31,8 @@ export type MovementLineAvgAggregateOutputType = {
   movementId: number | null
   productId: number | null
   quantity: number | null
+  unitPrice: runtime.Decimal | null
+  subtotal: runtime.Decimal | null
 }
 
 export type MovementLineSumAggregateOutputType = {
@@ -38,6 +40,8 @@ export type MovementLineSumAggregateOutputType = {
   movementId: number | null
   productId: number | null
   quantity: number | null
+  unitPrice: runtime.Decimal | null
+  subtotal: runtime.Decimal | null
 }
 
 export type MovementLineMinAggregateOutputType = {
@@ -45,6 +49,8 @@ export type MovementLineMinAggregateOutputType = {
   movementId: number | null
   productId: number | null
   quantity: number | null
+  unitPrice: runtime.Decimal | null
+  subtotal: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,6 +60,8 @@ export type MovementLineMaxAggregateOutputType = {
   movementId: number | null
   productId: number | null
   quantity: number | null
+  unitPrice: runtime.Decimal | null
+  subtotal: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,6 +71,8 @@ export type MovementLineCountAggregateOutputType = {
   movementId: number
   productId: number
   quantity: number
+  unitPrice: number
+  subtotal: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +84,8 @@ export type MovementLineAvgAggregateInputType = {
   movementId?: true
   productId?: true
   quantity?: true
+  unitPrice?: true
+  subtotal?: true
 }
 
 export type MovementLineSumAggregateInputType = {
@@ -81,6 +93,8 @@ export type MovementLineSumAggregateInputType = {
   movementId?: true
   productId?: true
   quantity?: true
+  unitPrice?: true
+  subtotal?: true
 }
 
 export type MovementLineMinAggregateInputType = {
@@ -88,6 +102,8 @@ export type MovementLineMinAggregateInputType = {
   movementId?: true
   productId?: true
   quantity?: true
+  unitPrice?: true
+  subtotal?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -97,6 +113,8 @@ export type MovementLineMaxAggregateInputType = {
   movementId?: true
   productId?: true
   quantity?: true
+  unitPrice?: true
+  subtotal?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,6 +124,8 @@ export type MovementLineCountAggregateInputType = {
   movementId?: true
   productId?: true
   quantity?: true
+  unitPrice?: true
+  subtotal?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -202,6 +222,8 @@ export type MovementLineGroupByOutputType = {
   movementId: number
   productId: number
   quantity: number
+  unitPrice: runtime.Decimal | null
+  subtotal: runtime.Decimal
   createdAt: Date
   updatedAt: Date
   _count: MovementLineCountAggregateOutputType | null
@@ -234,6 +256,8 @@ export type MovementLineWhereInput = {
   movementId?: Prisma.IntFilter<"MovementLine"> | number
   productId?: Prisma.IntFilter<"MovementLine"> | number
   quantity?: Prisma.IntFilter<"MovementLine"> | number
+  unitPrice?: Prisma.DecimalNullableFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
   movement?: Prisma.XOR<Prisma.MovementScalarRelationFilter, Prisma.MovementWhereInput>
@@ -245,6 +269,8 @@ export type MovementLineOrderByWithRelationInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   movement?: Prisma.MovementOrderByWithRelationInput
@@ -259,6 +285,8 @@ export type MovementLineWhereUniqueInput = Prisma.AtLeast<{
   movementId?: Prisma.IntFilter<"MovementLine"> | number
   productId?: Prisma.IntFilter<"MovementLine"> | number
   quantity?: Prisma.IntFilter<"MovementLine"> | number
+  unitPrice?: Prisma.DecimalNullableFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
   movement?: Prisma.XOR<Prisma.MovementScalarRelationFilter, Prisma.MovementWhereInput>
@@ -270,6 +298,8 @@ export type MovementLineOrderByWithAggregationInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MovementLineCountOrderByAggregateInput
@@ -287,12 +317,16 @@ export type MovementLineScalarWhereWithAggregatesInput = {
   movementId?: Prisma.IntWithAggregatesFilter<"MovementLine"> | number
   productId?: Prisma.IntWithAggregatesFilter<"MovementLine"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"MovementLine"> | number
+  unitPrice?: Prisma.DecimalNullableWithAggregatesFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalWithAggregatesFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MovementLine"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MovementLine"> | Date | string
 }
 
 export type MovementLineCreateInput = {
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
   movement: Prisma.MovementCreateNestedOneWithoutLinesInput
@@ -304,12 +338,16 @@ export type MovementLineUncheckedCreateInput = {
   movementId: number
   productId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type MovementLineUpdateInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   movement?: Prisma.MovementUpdateOneRequiredWithoutLinesNestedInput
@@ -321,6 +359,8 @@ export type MovementLineUncheckedUpdateInput = {
   movementId?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -330,12 +370,16 @@ export type MovementLineCreateManyInput = {
   movementId: number
   productId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type MovementLineUpdateManyMutationInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -345,6 +389,8 @@ export type MovementLineUncheckedUpdateManyInput = {
   movementId?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,6 +410,8 @@ export type MovementLineCountOrderByAggregateInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -373,6 +421,8 @@ export type MovementLineAvgOrderByAggregateInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
 }
 
 export type MovementLineMaxOrderByAggregateInput = {
@@ -380,6 +430,8 @@ export type MovementLineMaxOrderByAggregateInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -389,6 +441,8 @@ export type MovementLineMinOrderByAggregateInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -398,6 +452,8 @@ export type MovementLineSumOrderByAggregateInput = {
   movementId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+  subtotal?: Prisma.SortOrder
 }
 
 export type MovementLineCreateNestedManyWithoutProductInput = {
@@ -484,8 +540,18 @@ export type MovementLineUncheckedUpdateManyWithoutMovementNestedInput = {
   deleteMany?: Prisma.MovementLineScalarWhereInput | Prisma.MovementLineScalarWhereInput[]
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type MovementLineCreateWithoutProductInput = {
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
   movement: Prisma.MovementCreateNestedOneWithoutLinesInput
@@ -495,6 +561,8 @@ export type MovementLineUncheckedCreateWithoutProductInput = {
   id?: number
   movementId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -533,12 +601,16 @@ export type MovementLineScalarWhereInput = {
   movementId?: Prisma.IntFilter<"MovementLine"> | number
   productId?: Prisma.IntFilter<"MovementLine"> | number
   quantity?: Prisma.IntFilter<"MovementLine"> | number
+  unitPrice?: Prisma.DecimalNullableFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFilter<"MovementLine"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MovementLine"> | Date | string
 }
 
 export type MovementLineCreateWithoutMovementInput = {
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutMovementLinesInput
@@ -548,6 +620,8 @@ export type MovementLineUncheckedCreateWithoutMovementInput = {
   id?: number
   productId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -582,12 +656,16 @@ export type MovementLineCreateManyProductInput = {
   id?: number
   movementId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type MovementLineUpdateWithoutProductInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   movement?: Prisma.MovementUpdateOneRequiredWithoutLinesNestedInput
@@ -597,6 +675,8 @@ export type MovementLineUncheckedUpdateWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -605,6 +685,8 @@ export type MovementLineUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   movementId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -613,12 +695,16 @@ export type MovementLineCreateManyMovementInput = {
   id?: number
   productId: number
   quantity: number
+  unitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type MovementLineUpdateWithoutMovementInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutMovementLinesNestedInput
@@ -628,6 +714,8 @@ export type MovementLineUncheckedUpdateWithoutMovementInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -636,6 +724,8 @@ export type MovementLineUncheckedUpdateManyWithoutMovementInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   productId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -647,6 +737,8 @@ export type MovementLineSelect<ExtArgs extends runtime.Types.Extensions.Internal
   movementId?: boolean
   productId?: boolean
   quantity?: boolean
+  unitPrice?: boolean
+  subtotal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   movement?: boolean | Prisma.MovementDefaultArgs<ExtArgs>
@@ -658,6 +750,8 @@ export type MovementLineSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   movementId?: boolean
   productId?: boolean
   quantity?: boolean
+  unitPrice?: boolean
+  subtotal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   movement?: boolean | Prisma.MovementDefaultArgs<ExtArgs>
@@ -669,6 +763,8 @@ export type MovementLineSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   movementId?: boolean
   productId?: boolean
   quantity?: boolean
+  unitPrice?: boolean
+  subtotal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   movement?: boolean | Prisma.MovementDefaultArgs<ExtArgs>
@@ -680,11 +776,13 @@ export type MovementLineSelectScalar = {
   movementId?: boolean
   productId?: boolean
   quantity?: boolean
+  unitPrice?: boolean
+  subtotal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MovementLineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "movementId" | "productId" | "quantity" | "createdAt" | "updatedAt", ExtArgs["result"]["movementLine"]>
+export type MovementLineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "movementId" | "productId" | "quantity" | "unitPrice" | "subtotal" | "createdAt" | "updatedAt", ExtArgs["result"]["movementLine"]>
 export type MovementLineInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   movement?: boolean | Prisma.MovementDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -709,6 +807,8 @@ export type $MovementLinePayload<ExtArgs extends runtime.Types.Extensions.Intern
     movementId: number
     productId: number
     quantity: number
+    unitPrice: runtime.Decimal | null
+    subtotal: runtime.Decimal
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["movementLine"]>
@@ -1140,6 +1240,8 @@ export interface MovementLineFieldRefs {
   readonly movementId: Prisma.FieldRef<"MovementLine", 'Int'>
   readonly productId: Prisma.FieldRef<"MovementLine", 'Int'>
   readonly quantity: Prisma.FieldRef<"MovementLine", 'Int'>
+  readonly unitPrice: Prisma.FieldRef<"MovementLine", 'Decimal'>
+  readonly subtotal: Prisma.FieldRef<"MovementLine", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"MovementLine", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MovementLine", 'DateTime'>
 }

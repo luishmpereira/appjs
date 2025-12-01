@@ -14,19 +14,21 @@ datasource db {
 }
 
 model User {
-  id               Int        @id @default(autoincrement())
-  email            String     @unique
+  id               Int            @id @default(autoincrement())
+  email            String         @unique
   name             String
   password         String
   avatar           String?
   roleId           Int
-  role             Role       @relation(fields: [roleId], references: [id])
+  role             Role           @relation(fields: [roleId], references: [id])
   customers        Contact[]
-  createdMovements Movement[] @relation("createdBy")
-  updatedMovements Movement[] @relation("updatedBy")
+  createdMovements Movement[]     @relation("createdBy")
+  updatedMovements Movement[]     @relation("updatedBy")
+  createdPayments  Payment[]      @relation("paymentCreator")
   activities       UserActivity[]
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  payments         Payment[]
 }
 
 model Role {
@@ -39,14 +41,15 @@ model Role {
 }
 
 model Contact {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String
   email     String
   phone     String
   sellerId  Int
-  seller    User     @relation(fields: [sellerId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  seller    User       @relation(fields: [sellerId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  movements Movement[]
 }
 
 model Product {
@@ -61,26 +64,59 @@ model Product {
 }
 
 model Movement {
-  id           Int            @id @default(autoincrement())
-  lines        MovementLine[]
-  movementDate DateTime       @default(now())
-  operationId  Int
-  operation    Operation      @relation(fields: [operationId], references: [id])
-  createdBy    User           @relation(fields: [createdById], references: [id], name: "createdBy")
-  createdById  Int
-  updatedBy    User           @relation(fields: [updatedById], references: [id], name: "updatedBy")
-  updatedById  Int
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id                Int            @id @default(autoincrement())
+  stockMovementCode String         @unique
+  lines             MovementLine[]
+  movementType      String
+  contactId         Int
+  contact           Contact        @relation(fields: [contactId], references: [id])
+  validUntil        DateTime?
+  totalAmount       Decimal        @db.Decimal(10, 4)
+  paidAmount        Decimal        @db.Decimal(10, 4)
+  balanceAmount     Decimal        @db.Decimal(10, 4)
+  movementDate      DateTime       @default(now())
+  operationId       Int
+  operation         Operation      @relation(fields: [operationId], references: [id])
+  status            MovementStatus @default(DRAFT)
+  notes             String?
+  createdBy         User           @relation(fields: [createdById], references: [id], name: "createdBy")
+  createdById       Int
+  updatedBy         User           @relation(fields: [updatedById], references: [id], name: "updatedBy")
+  updatedById       Int
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  payments          Payment[]
+  accountEntries    AccountEntry[]
+  convertedToId     Int?           @unique
+  convertedTo       Movement?      @relation("ConvertedMovements", fields: [convertedToId], references: [id])
+  convertedFrom     Movement?      @relation("ConvertedMovements")
+}
+
+enum MovementStatus {
+  DRAFT
+  CONFIRMED
+  CANCELED
+
+  SENT
+  ACCEPTED
+  DECLINED
+  EXPIRED
+
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  FULFILLED
 }
 
 model MovementLine {
   id         Int      @id @default(autoincrement())
   movementId Int
-  movement   Movement @relation(fields: [movementId], references: [id])
+  movement   Movement @relation(fields: [movementId], references: [id], onDelete: Cascade)
   product    Product  @relation(fields: [productId], references: [id])
   productId  Int
   quantity   Int
+  unitPrice  Decimal? @db.Decimal(10, 4)
+  subtotal   Decimal  @db.Decimal(10, 4)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -88,13 +124,86 @@ model MovementLine {
 model Operation {
   id              Int        @id @default(autoincrement())
   name            String
-  operationCode   String
+  operationCode   String     @unique
   changeInventory Boolean
   hasFinance      Boolean
   operationType   String
   movements       Movement[]
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+}
+
+model Payment {
+  id              Int            @id @default(autoincrement())
+  paymentCode     String         @unique
+  movementId      Int
+  movement        Movement       @relation(fields: [movementId], references: [id])
+  amount          Decimal        @db.Decimal(10, 4)
+  paymentDate     DateTime       @default(now())
+  paymentMethodId Int
+  paymentMethod   PaymentMethod  @relation(fields: [paymentMethodId], references: [id])
+  status          PaymentStatus  @default(PENDING)
+  notes           String?
+  accountEntries  AccountEntry[]
+  createdBy       User           @relation(fields: [createdById], references: [id], name: "paymentCreator")
+  createdById     Int
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  user            User?          @relation(fields: [userId], references: [id])
+  userId          Int?
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+}
+
+model PaymentMethod {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+  payments    Payment[]
+}
+
+model Account {
+  id          Int            @id @default(autoincrement())
+  accountCode String         @unique
+  name        String         @unique
+  accountType AccountType
+  balance     Decimal        @default(0) @db.Decimal(10, 4)
+  entries     AccountEntry[]
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model AccountEntry {
+  id          Int       @id @default(autoincrement())
+  accountId   Int
+  account     Account   @relation(fields: [accountId], references: [id])
+  paymentId   Int?
+  payment     Payment?  @relation(fields: [paymentId], references: [id])
+  movementId  Int?
+  movement    Movement? @relation(fields: [movementId], references: [id])
+  amount      Decimal   @db.Decimal(10, 4)
+  entryType   EntryType
+  description String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum AccountType {
+  ASSET
+  LIABILITY
+  REVENUE
+  EXPENSE
+}
+
+enum EntryType {
+  DEBIT
+  CREDIT
 }
 
 model UserActivity {

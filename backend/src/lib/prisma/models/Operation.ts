@@ -257,18 +257,18 @@ export type OperationOrderByWithRelationInput = {
 
 export type OperationWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  operationCode?: string
   AND?: Prisma.OperationWhereInput | Prisma.OperationWhereInput[]
   OR?: Prisma.OperationWhereInput[]
   NOT?: Prisma.OperationWhereInput | Prisma.OperationWhereInput[]
   name?: Prisma.StringFilter<"Operation"> | string
-  operationCode?: Prisma.StringFilter<"Operation"> | string
   changeInventory?: Prisma.BoolFilter<"Operation"> | boolean
   hasFinance?: Prisma.BoolFilter<"Operation"> | boolean
   operationType?: Prisma.StringFilter<"Operation"> | string
   createdAt?: Prisma.DateTimeFilter<"Operation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Operation"> | Date | string
   movements?: Prisma.MovementListRelationFilter
-}, "id">
+}, "id" | "operationCode">
 
 export type OperationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

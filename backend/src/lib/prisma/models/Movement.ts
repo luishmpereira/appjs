@@ -28,92 +28,172 @@ export type AggregateMovement = {
 
 export type MovementAvgAggregateOutputType = {
   id: number | null
+  contactId: number | null
+  totalAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  balanceAmount: runtime.Decimal | null
   operationId: number | null
   createdById: number | null
   updatedById: number | null
+  convertedToId: number | null
 }
 
 export type MovementSumAggregateOutputType = {
   id: number | null
+  contactId: number | null
+  totalAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  balanceAmount: runtime.Decimal | null
   operationId: number | null
   createdById: number | null
   updatedById: number | null
+  convertedToId: number | null
 }
 
 export type MovementMinAggregateOutputType = {
   id: number | null
+  stockMovementCode: string | null
+  movementType: string | null
+  contactId: number | null
+  validUntil: Date | null
+  totalAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  balanceAmount: runtime.Decimal | null
   movementDate: Date | null
   operationId: number | null
+  status: $Enums.MovementStatus | null
+  notes: string | null
   createdById: number | null
   updatedById: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  convertedToId: number | null
 }
 
 export type MovementMaxAggregateOutputType = {
   id: number | null
+  stockMovementCode: string | null
+  movementType: string | null
+  contactId: number | null
+  validUntil: Date | null
+  totalAmount: runtime.Decimal | null
+  paidAmount: runtime.Decimal | null
+  balanceAmount: runtime.Decimal | null
   movementDate: Date | null
   operationId: number | null
+  status: $Enums.MovementStatus | null
+  notes: string | null
   createdById: number | null
   updatedById: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  convertedToId: number | null
 }
 
 export type MovementCountAggregateOutputType = {
   id: number
+  stockMovementCode: number
+  movementType: number
+  contactId: number
+  validUntil: number
+  totalAmount: number
+  paidAmount: number
+  balanceAmount: number
   movementDate: number
   operationId: number
+  status: number
+  notes: number
   createdById: number
   updatedById: number
   createdAt: number
   updatedAt: number
+  convertedToId: number
   _all: number
 }
 
 
 export type MovementAvgAggregateInputType = {
   id?: true
+  contactId?: true
+  totalAmount?: true
+  paidAmount?: true
+  balanceAmount?: true
   operationId?: true
   createdById?: true
   updatedById?: true
+  convertedToId?: true
 }
 
 export type MovementSumAggregateInputType = {
   id?: true
+  contactId?: true
+  totalAmount?: true
+  paidAmount?: true
+  balanceAmount?: true
   operationId?: true
   createdById?: true
   updatedById?: true
+  convertedToId?: true
 }
 
 export type MovementMinAggregateInputType = {
   id?: true
+  stockMovementCode?: true
+  movementType?: true
+  contactId?: true
+  validUntil?: true
+  totalAmount?: true
+  paidAmount?: true
+  balanceAmount?: true
   movementDate?: true
   operationId?: true
+  status?: true
+  notes?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  convertedToId?: true
 }
 
 export type MovementMaxAggregateInputType = {
   id?: true
+  stockMovementCode?: true
+  movementType?: true
+  contactId?: true
+  validUntil?: true
+  totalAmount?: true
+  paidAmount?: true
+  balanceAmount?: true
   movementDate?: true
   operationId?: true
+  status?: true
+  notes?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  convertedToId?: true
 }
 
 export type MovementCountAggregateInputType = {
   id?: true
+  stockMovementCode?: true
+  movementType?: true
+  contactId?: true
+  validUntil?: true
+  totalAmount?: true
+  paidAmount?: true
+  balanceAmount?: true
   movementDate?: true
   operationId?: true
+  status?: true
+  notes?: true
   createdById?: true
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  convertedToId?: true
   _all?: true
 }
 
@@ -205,12 +285,22 @@ export type MovementGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type MovementGroupByOutputType = {
   id: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil: Date | null
+  totalAmount: runtime.Decimal
+  paidAmount: runtime.Decimal
+  balanceAmount: runtime.Decimal
   movementDate: Date
   operationId: number
+  status: $Enums.MovementStatus
+  notes: string | null
   createdById: number
   updatedById: number
   createdAt: Date
   updatedAt: Date
+  convertedToId: number | null
   _count: MovementCountAggregateOutputType | null
   _avg: MovementAvgAggregateOutputType | null
   _sum: MovementSumAggregateOutputType | null
@@ -238,57 +328,112 @@ export type MovementWhereInput = {
   OR?: Prisma.MovementWhereInput[]
   NOT?: Prisma.MovementWhereInput | Prisma.MovementWhereInput[]
   id?: Prisma.IntFilter<"Movement"> | number
+  stockMovementCode?: Prisma.StringFilter<"Movement"> | string
+  movementType?: Prisma.StringFilter<"Movement"> | string
+  contactId?: Prisma.IntFilter<"Movement"> | number
+  validUntil?: Prisma.DateTimeNullableFilter<"Movement"> | Date | string | null
+  totalAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
   operationId?: Prisma.IntFilter<"Movement"> | number
+  status?: Prisma.EnumMovementStatusFilter<"Movement"> | $Enums.MovementStatus
+  notes?: Prisma.StringNullableFilter<"Movement"> | string | null
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
+  convertedToId?: Prisma.IntNullableFilter<"Movement"> | number | null
   lines?: Prisma.MovementLineListRelationFilter
+  contact?: Prisma.XOR<Prisma.ContactScalarRelationFilter, Prisma.ContactWhereInput>
   operation?: Prisma.XOR<Prisma.OperationScalarRelationFilter, Prisma.OperationWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  payments?: Prisma.PaymentListRelationFilter
+  accountEntries?: Prisma.AccountEntryListRelationFilter
+  convertedTo?: Prisma.XOR<Prisma.MovementNullableScalarRelationFilter, Prisma.MovementWhereInput> | null
+  convertedFrom?: Prisma.XOR<Prisma.MovementNullableScalarRelationFilter, Prisma.MovementWhereInput> | null
 }
 
 export type MovementOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  stockMovementCode?: Prisma.SortOrder
+  movementType?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  validUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrderInput | Prisma.SortOrder
   lines?: Prisma.MovementLineOrderByRelationAggregateInput
+  contact?: Prisma.ContactOrderByWithRelationInput
   operation?: Prisma.OperationOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
+  accountEntries?: Prisma.AccountEntryOrderByRelationAggregateInput
+  convertedTo?: Prisma.MovementOrderByWithRelationInput
+  convertedFrom?: Prisma.MovementOrderByWithRelationInput
 }
 
 export type MovementWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  stockMovementCode?: string
+  convertedToId?: number
   AND?: Prisma.MovementWhereInput | Prisma.MovementWhereInput[]
   OR?: Prisma.MovementWhereInput[]
   NOT?: Prisma.MovementWhereInput | Prisma.MovementWhereInput[]
+  movementType?: Prisma.StringFilter<"Movement"> | string
+  contactId?: Prisma.IntFilter<"Movement"> | number
+  validUntil?: Prisma.DateTimeNullableFilter<"Movement"> | Date | string | null
+  totalAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
   operationId?: Prisma.IntFilter<"Movement"> | number
+  status?: Prisma.EnumMovementStatusFilter<"Movement"> | $Enums.MovementStatus
+  notes?: Prisma.StringNullableFilter<"Movement"> | string | null
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
   lines?: Prisma.MovementLineListRelationFilter
+  contact?: Prisma.XOR<Prisma.ContactScalarRelationFilter, Prisma.ContactWhereInput>
   operation?: Prisma.XOR<Prisma.OperationScalarRelationFilter, Prisma.OperationWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+  payments?: Prisma.PaymentListRelationFilter
+  accountEntries?: Prisma.AccountEntryListRelationFilter
+  convertedTo?: Prisma.XOR<Prisma.MovementNullableScalarRelationFilter, Prisma.MovementWhereInput> | null
+  convertedFrom?: Prisma.XOR<Prisma.MovementNullableScalarRelationFilter, Prisma.MovementWhereInput> | null
+}, "id" | "stockMovementCode" | "convertedToId">
 
 export type MovementOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  stockMovementCode?: Prisma.SortOrder
+  movementType?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  validUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MovementCountOrderByAggregateInput
   _avg?: Prisma.MovementAvgOrderByAggregateInput
   _max?: Prisma.MovementMaxOrderByAggregateInput
@@ -301,80 +446,170 @@ export type MovementScalarWhereWithAggregatesInput = {
   OR?: Prisma.MovementScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MovementScalarWhereWithAggregatesInput | Prisma.MovementScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Movement"> | number
+  stockMovementCode?: Prisma.StringWithAggregatesFilter<"Movement"> | string
+  movementType?: Prisma.StringWithAggregatesFilter<"Movement"> | string
+  contactId?: Prisma.IntWithAggregatesFilter<"Movement"> | number
+  validUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"Movement"> | Date | string | null
+  totalAmount?: Prisma.DecimalWithAggregatesFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalWithAggregatesFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalWithAggregatesFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeWithAggregatesFilter<"Movement"> | Date | string
   operationId?: Prisma.IntWithAggregatesFilter<"Movement"> | number
+  status?: Prisma.EnumMovementStatusWithAggregatesFilter<"Movement"> | $Enums.MovementStatus
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Movement"> | string | null
   createdById?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   updatedById?: Prisma.IntWithAggregatesFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Movement"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Movement"> | Date | string
+  convertedToId?: Prisma.IntNullableWithAggregatesFilter<"Movement"> | number | null
 }
 
 export type MovementCreateInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
   operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
   updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementUncheckedCreateInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
   lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementUpdateInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
   operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
   updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementCreateManyInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
 }
 
 export type MovementUpdateManyMutationInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MovementUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MovementListRelationFilter = {
@@ -387,48 +622,93 @@ export type MovementOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type MovementNullableScalarRelationFilter = {
+  is?: Prisma.MovementWhereInput | null
+  isNot?: Prisma.MovementWhereInput | null
+}
+
 export type MovementCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  stockMovementCode?: Prisma.SortOrder
+  movementType?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  validUntil?: Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrder
 }
 
 export type MovementAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrder
 }
 
 export type MovementMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  stockMovementCode?: Prisma.SortOrder
+  movementType?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  validUntil?: Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrder
 }
 
 export type MovementMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  stockMovementCode?: Prisma.SortOrder
+  movementType?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  validUntil?: Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   movementDate?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrder
 }
 
 export type MovementSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
+  totalAmount?: Prisma.SortOrder
+  paidAmount?: Prisma.SortOrder
+  balanceAmount?: Prisma.SortOrder
   operationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+  convertedToId?: Prisma.SortOrder
 }
 
 export type MovementScalarRelationFilter = {
@@ -520,6 +800,120 @@ export type MovementUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
 }
 
+export type MovementCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput> | Prisma.MovementCreateWithoutContactInput[] | Prisma.MovementUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutContactInput | Prisma.MovementCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.MovementCreateManyContactInputEnvelope
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+}
+
+export type MovementUncheckedCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput> | Prisma.MovementCreateWithoutContactInput[] | Prisma.MovementUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutContactInput | Prisma.MovementCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.MovementCreateManyContactInputEnvelope
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+}
+
+export type MovementUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput> | Prisma.MovementCreateWithoutContactInput[] | Prisma.MovementUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutContactInput | Prisma.MovementCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.MovementUpsertWithWhereUniqueWithoutContactInput | Prisma.MovementUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.MovementCreateManyContactInputEnvelope
+  set?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  disconnect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  delete?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  update?: Prisma.MovementUpdateWithWhereUniqueWithoutContactInput | Prisma.MovementUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.MovementUpdateManyWithWhereWithoutContactInput | Prisma.MovementUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
+}
+
+export type MovementUncheckedUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput> | Prisma.MovementCreateWithoutContactInput[] | Prisma.MovementUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutContactInput | Prisma.MovementCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.MovementUpsertWithWhereUniqueWithoutContactInput | Prisma.MovementUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.MovementCreateManyContactInputEnvelope
+  set?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  disconnect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  delete?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  connect?: Prisma.MovementWhereUniqueInput | Prisma.MovementWhereUniqueInput[]
+  update?: Prisma.MovementUpdateWithWhereUniqueWithoutContactInput | Prisma.MovementUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.MovementUpdateManyWithWhereWithoutContactInput | Prisma.MovementUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
+}
+
+export type MovementCreateNestedOneWithoutConvertedFromInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedFromInput, Prisma.MovementUncheckedCreateWithoutConvertedFromInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedFromInput
+  connect?: Prisma.MovementWhereUniqueInput
+}
+
+export type MovementCreateNestedOneWithoutConvertedToInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedToInput
+  connect?: Prisma.MovementWhereUniqueInput
+}
+
+export type MovementUncheckedCreateNestedOneWithoutConvertedToInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedToInput
+  connect?: Prisma.MovementWhereUniqueInput
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type EnumMovementStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MovementStatus
+}
+
+export type MovementUpdateOneWithoutConvertedFromNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedFromInput, Prisma.MovementUncheckedCreateWithoutConvertedFromInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedFromInput
+  upsert?: Prisma.MovementUpsertWithoutConvertedFromInput
+  disconnect?: Prisma.MovementWhereInput | boolean
+  delete?: Prisma.MovementWhereInput | boolean
+  connect?: Prisma.MovementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MovementUpdateToOneWithWhereWithoutConvertedFromInput, Prisma.MovementUpdateWithoutConvertedFromInput>, Prisma.MovementUncheckedUpdateWithoutConvertedFromInput>
+}
+
+export type MovementUpdateOneWithoutConvertedToNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedToInput
+  upsert?: Prisma.MovementUpsertWithoutConvertedToInput
+  disconnect?: Prisma.MovementWhereInput | boolean
+  delete?: Prisma.MovementWhereInput | boolean
+  connect?: Prisma.MovementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MovementUpdateToOneWithWhereWithoutConvertedToInput, Prisma.MovementUpdateWithoutConvertedToInput>, Prisma.MovementUncheckedUpdateWithoutConvertedToInput>
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type MovementUncheckedUpdateOneWithoutConvertedToNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutConvertedToInput
+  upsert?: Prisma.MovementUpsertWithoutConvertedToInput
+  disconnect?: Prisma.MovementWhereInput | boolean
+  delete?: Prisma.MovementWhereInput | boolean
+  connect?: Prisma.MovementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MovementUpdateToOneWithWhereWithoutConvertedToInput, Prisma.MovementUpdateWithoutConvertedToInput>, Prisma.MovementUncheckedUpdateWithoutConvertedToInput>
+}
+
 export type MovementCreateNestedOneWithoutLinesInput = {
   create?: Prisma.XOR<Prisma.MovementCreateWithoutLinesInput, Prisma.MovementUncheckedCreateWithoutLinesInput>
   connectOrCreate?: Prisma.MovementCreateOrConnectWithoutLinesInput
@@ -576,23 +970,79 @@ export type MovementUncheckedUpdateManyWithoutOperationNestedInput = {
   deleteMany?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
 }
 
+export type MovementCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutPaymentsInput, Prisma.MovementUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.MovementWhereUniqueInput
+}
+
+export type MovementUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutPaymentsInput, Prisma.MovementUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.MovementUpsertWithoutPaymentsInput
+  connect?: Prisma.MovementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MovementUpdateToOneWithWhereWithoutPaymentsInput, Prisma.MovementUpdateWithoutPaymentsInput>, Prisma.MovementUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type MovementCreateNestedOneWithoutAccountEntriesInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutAccountEntriesInput, Prisma.MovementUncheckedCreateWithoutAccountEntriesInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutAccountEntriesInput
+  connect?: Prisma.MovementWhereUniqueInput
+}
+
+export type MovementUpdateOneWithoutAccountEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.MovementCreateWithoutAccountEntriesInput, Prisma.MovementUncheckedCreateWithoutAccountEntriesInput>
+  connectOrCreate?: Prisma.MovementCreateOrConnectWithoutAccountEntriesInput
+  upsert?: Prisma.MovementUpsertWithoutAccountEntriesInput
+  disconnect?: Prisma.MovementWhereInput | boolean
+  delete?: Prisma.MovementWhereInput | boolean
+  connect?: Prisma.MovementWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MovementUpdateToOneWithWhereWithoutAccountEntriesInput, Prisma.MovementUpdateWithoutAccountEntriesInput>, Prisma.MovementUncheckedUpdateWithoutAccountEntriesInput>
+}
+
 export type MovementCreateWithoutCreatedByInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
   operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
   updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementUncheckedCreateWithoutCreatedByInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
   lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementCreateOrConnectWithoutCreatedByInput = {
@@ -606,22 +1056,48 @@ export type MovementCreateManyCreatedByInputEnvelope = {
 }
 
 export type MovementCreateWithoutUpdatedByInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
   operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementUncheckedCreateWithoutUpdatedByInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
   lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementCreateOrConnectWithoutUpdatedByInput = {
@@ -655,12 +1131,22 @@ export type MovementScalarWhereInput = {
   OR?: Prisma.MovementScalarWhereInput[]
   NOT?: Prisma.MovementScalarWhereInput | Prisma.MovementScalarWhereInput[]
   id?: Prisma.IntFilter<"Movement"> | number
+  stockMovementCode?: Prisma.StringFilter<"Movement"> | string
+  movementType?: Prisma.StringFilter<"Movement"> | string
+  contactId?: Prisma.IntFilter<"Movement"> | number
+  validUntil?: Prisma.DateTimeNullableFilter<"Movement"> | Date | string | null
+  totalAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFilter<"Movement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFilter<"Movement"> | Date | string
   operationId?: Prisma.IntFilter<"Movement"> | number
+  status?: Prisma.EnumMovementStatusFilter<"Movement"> | $Enums.MovementStatus
+  notes?: Prisma.StringNullableFilter<"Movement"> | string | null
   createdById?: Prisma.IntFilter<"Movement"> | number
   updatedById?: Prisma.IntFilter<"Movement"> | number
   createdAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Movement"> | Date | string
+  convertedToId?: Prisma.IntNullableFilter<"Movement"> | number | null
 }
 
 export type MovementUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -679,23 +1165,332 @@ export type MovementUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.MovementUpdateManyMutationInput, Prisma.MovementUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
-export type MovementCreateWithoutLinesInput = {
+export type MovementCreateWithoutContactInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
   operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
   updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
 }
 
-export type MovementUncheckedCreateWithoutLinesInput = {
+export type MovementUncheckedCreateWithoutContactInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
+  lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementCreateOrConnectWithoutContactInput = {
+  where: Prisma.MovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput>
+}
+
+export type MovementCreateManyContactInputEnvelope = {
+  data: Prisma.MovementCreateManyContactInput | Prisma.MovementCreateManyContactInput[]
+  skipDuplicates?: boolean
+}
+
+export type MovementUpsertWithWhereUniqueWithoutContactInput = {
+  where: Prisma.MovementWhereUniqueInput
+  update: Prisma.XOR<Prisma.MovementUpdateWithoutContactInput, Prisma.MovementUncheckedUpdateWithoutContactInput>
+  create: Prisma.XOR<Prisma.MovementCreateWithoutContactInput, Prisma.MovementUncheckedCreateWithoutContactInput>
+}
+
+export type MovementUpdateWithWhereUniqueWithoutContactInput = {
+  where: Prisma.MovementWhereUniqueInput
+  data: Prisma.XOR<Prisma.MovementUpdateWithoutContactInput, Prisma.MovementUncheckedUpdateWithoutContactInput>
+}
+
+export type MovementUpdateManyWithWhereWithoutContactInput = {
+  where: Prisma.MovementScalarWhereInput
+  data: Prisma.XOR<Prisma.MovementUpdateManyMutationInput, Prisma.MovementUncheckedUpdateManyWithoutContactInput>
+}
+
+export type MovementCreateWithoutConvertedFromInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
+  operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+}
+
+export type MovementUncheckedCreateWithoutConvertedFromInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  convertedToId?: number | null
+  lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+}
+
+export type MovementCreateOrConnectWithoutConvertedFromInput = {
+  where: Prisma.MovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MovementCreateWithoutConvertedFromInput, Prisma.MovementUncheckedCreateWithoutConvertedFromInput>
+}
+
+export type MovementCreateWithoutConvertedToInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
+  operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementUncheckedCreateWithoutConvertedToInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementCreateOrConnectWithoutConvertedToInput = {
+  where: Prisma.MovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+}
+
+export type MovementUpsertWithoutConvertedFromInput = {
+  update: Prisma.XOR<Prisma.MovementUpdateWithoutConvertedFromInput, Prisma.MovementUncheckedUpdateWithoutConvertedFromInput>
+  create: Prisma.XOR<Prisma.MovementCreateWithoutConvertedFromInput, Prisma.MovementUncheckedCreateWithoutConvertedFromInput>
+  where?: Prisma.MovementWhereInput
+}
+
+export type MovementUpdateToOneWithWhereWithoutConvertedFromInput = {
+  where?: Prisma.MovementWhereInput
+  data: Prisma.XOR<Prisma.MovementUpdateWithoutConvertedFromInput, Prisma.MovementUncheckedUpdateWithoutConvertedFromInput>
+}
+
+export type MovementUpdateWithoutConvertedFromInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
+  operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+}
+
+export type MovementUncheckedUpdateWithoutConvertedFromInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+}
+
+export type MovementUpsertWithoutConvertedToInput = {
+  update: Prisma.XOR<Prisma.MovementUpdateWithoutConvertedToInput, Prisma.MovementUncheckedUpdateWithoutConvertedToInput>
+  create: Prisma.XOR<Prisma.MovementCreateWithoutConvertedToInput, Prisma.MovementUncheckedCreateWithoutConvertedToInput>
+  where?: Prisma.MovementWhereInput
+}
+
+export type MovementUpdateToOneWithWhereWithoutConvertedToInput = {
+  where?: Prisma.MovementWhereInput
+  data: Prisma.XOR<Prisma.MovementUpdateWithoutConvertedToInput, Prisma.MovementUncheckedUpdateWithoutConvertedToInput>
+}
+
+export type MovementUpdateWithoutConvertedToInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
+  operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementUncheckedUpdateWithoutConvertedToInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementCreateWithoutLinesInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
+  operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementUncheckedCreateWithoutLinesInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  convertedToId?: number | null
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementCreateOrConnectWithoutLinesInput = {
@@ -715,41 +1510,93 @@ export type MovementUpdateToOneWithWhereWithoutLinesInput = {
 }
 
 export type MovementUpdateWithoutLinesInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
   operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
   updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateWithoutLinesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementCreateWithoutOperationInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
   createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
   updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementUncheckedCreateWithoutOperationInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
   lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
 }
 
 export type MovementCreateOrConnectWithoutOperationInput = {
@@ -778,115 +1625,548 @@ export type MovementUpdateManyWithWhereWithoutOperationInput = {
   data: Prisma.XOR<Prisma.MovementUpdateManyMutationInput, Prisma.MovementUncheckedUpdateManyWithoutOperationInput>
 }
 
-export type MovementCreateManyCreatedByInput = {
+export type MovementCreateWithoutPaymentsInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
+  operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  accountEntries?: Prisma.AccountEntryCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementUncheckedCreateWithoutPaymentsInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
+  lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  accountEntries?: Prisma.AccountEntryUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.MovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MovementCreateWithoutPaymentsInput, Prisma.MovementUncheckedCreateWithoutPaymentsInput>
+}
+
+export type MovementUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.MovementUpdateWithoutPaymentsInput, Prisma.MovementUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.MovementCreateWithoutPaymentsInput, Prisma.MovementUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.MovementWhereInput
+}
+
+export type MovementUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.MovementWhereInput
+  data: Prisma.XOR<Prisma.MovementUpdateWithoutPaymentsInput, Prisma.MovementUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type MovementUpdateWithoutPaymentsInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
+  operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementCreateWithoutAccountEntriesInput = {
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lines?: Prisma.MovementLineCreateNestedManyWithoutMovementInput
+  contact: Prisma.ContactCreateNestedOneWithoutMovementsInput
+  operation: Prisma.OperationCreateNestedOneWithoutMovementsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutCreatedMovementsInput
+  updatedBy: Prisma.UserCreateNestedOneWithoutUpdatedMovementsInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutMovementInput
+  convertedTo?: Prisma.MovementCreateNestedOneWithoutConvertedFromInput
+  convertedFrom?: Prisma.MovementCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementUncheckedCreateWithoutAccountEntriesInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  convertedToId?: number | null
+  lines?: Prisma.MovementLineUncheckedCreateNestedManyWithoutMovementInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutMovementInput
+  convertedFrom?: Prisma.MovementUncheckedCreateNestedOneWithoutConvertedToInput
+}
+
+export type MovementCreateOrConnectWithoutAccountEntriesInput = {
+  where: Prisma.MovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.MovementCreateWithoutAccountEntriesInput, Prisma.MovementUncheckedCreateWithoutAccountEntriesInput>
+}
+
+export type MovementUpsertWithoutAccountEntriesInput = {
+  update: Prisma.XOR<Prisma.MovementUpdateWithoutAccountEntriesInput, Prisma.MovementUncheckedUpdateWithoutAccountEntriesInput>
+  create: Prisma.XOR<Prisma.MovementCreateWithoutAccountEntriesInput, Prisma.MovementUncheckedCreateWithoutAccountEntriesInput>
+  where?: Prisma.MovementWhereInput
+}
+
+export type MovementUpdateToOneWithWhereWithoutAccountEntriesInput = {
+  where?: Prisma.MovementWhereInput
+  data: Prisma.XOR<Prisma.MovementUpdateWithoutAccountEntriesInput, Prisma.MovementUncheckedUpdateWithoutAccountEntriesInput>
+}
+
+export type MovementUpdateWithoutAccountEntriesInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
+  operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementUncheckedUpdateWithoutAccountEntriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementCreateManyCreatedByInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  convertedToId?: number | null
 }
 
 export type MovementCreateManyUpdatedByInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
   operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
 }
 
 export type MovementUpdateWithoutCreatedByInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
   operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
   updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MovementUpdateWithoutUpdatedByInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
+  operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
+}
+
+export type MovementUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type MovementCreateManyContactInput = {
+  id?: number
+  stockMovementCode: string
+  movementType: string
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Date | string
+  operationId: number
+  status?: $Enums.MovementStatus
+  notes?: string | null
+  createdById: number
+  updatedById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  convertedToId?: number | null
+}
+
+export type MovementUpdateWithoutContactInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
   operation?: Prisma.OperationUpdateOneRequiredWithoutMovementsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
+  updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
 }
 
-export type MovementUncheckedUpdateWithoutUpdatedByInput = {
+export type MovementUncheckedUpdateWithoutContactInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
 }
 
-export type MovementUncheckedUpdateManyWithoutUpdatedByInput = {
+export type MovementUncheckedUpdateManyWithoutContactInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operationId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MovementCreateManyOperationInput = {
   id?: number
+  stockMovementCode: string
+  movementType: string
+  contactId: number
+  validUntil?: Date | string | null
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Date | string
+  status?: $Enums.MovementStatus
+  notes?: string | null
   createdById: number
   updatedById: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  convertedToId?: number | null
 }
 
 export type MovementUpdateWithoutOperationInput = {
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lines?: Prisma.MovementLineUpdateManyWithoutMovementNestedInput
+  contact?: Prisma.ContactUpdateOneRequiredWithoutMovementsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutCreatedMovementsNestedInput
   updatedBy?: Prisma.UserUpdateOneRequiredWithoutUpdatedMovementsNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUpdateManyWithoutMovementNestedInput
+  convertedTo?: Prisma.MovementUpdateOneWithoutConvertedFromNestedInput
+  convertedFrom?: Prisma.MovementUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateWithoutOperationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lines?: Prisma.MovementLineUncheckedUpdateManyWithoutMovementNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutMovementNestedInput
+  accountEntries?: Prisma.AccountEntryUncheckedUpdateManyWithoutMovementNestedInput
+  convertedFrom?: Prisma.MovementUncheckedUpdateOneWithoutConvertedToNestedInput
 }
 
 export type MovementUncheckedUpdateManyWithoutOperationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovementCode?: Prisma.StringFieldUpdateOperationsInput | string
+  movementType?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   movementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumMovementStatusFieldUpdateOperationsInput | $Enums.MovementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  convertedToId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -896,10 +2176,14 @@ export type MovementUncheckedUpdateManyWithoutOperationInput = {
 
 export type MovementCountOutputType = {
   lines: number
+  payments: number
+  accountEntries: number
 }
 
 export type MovementCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lines?: boolean | MovementCountOutputTypeCountLinesArgs
+  payments?: boolean | MovementCountOutputTypeCountPaymentsArgs
+  accountEntries?: boolean | MovementCountOutputTypeCountAccountEntriesArgs
 }
 
 /**
@@ -919,93 +2203,180 @@ export type MovementCountOutputTypeCountLinesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.MovementLineWhereInput
 }
 
+/**
+ * MovementCountOutputType without action
+ */
+export type MovementCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * MovementCountOutputType without action
+ */
+export type MovementCountOutputTypeCountAccountEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountEntryWhereInput
+}
+
 
 export type MovementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  stockMovementCode?: boolean
+  movementType?: boolean
+  contactId?: boolean
+  validUntil?: boolean
+  totalAmount?: boolean
+  paidAmount?: boolean
+  balanceAmount?: boolean
   movementDate?: boolean
   operationId?: boolean
+  status?: boolean
+  notes?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  convertedToId?: boolean
   lines?: boolean | Prisma.Movement$linesArgs<ExtArgs>
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.Movement$paymentsArgs<ExtArgs>
+  accountEntries?: boolean | Prisma.Movement$accountEntriesArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
+  convertedFrom?: boolean | Prisma.Movement$convertedFromArgs<ExtArgs>
   _count?: boolean | Prisma.MovementCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["movement"]>
 
 export type MovementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  stockMovementCode?: boolean
+  movementType?: boolean
+  contactId?: boolean
+  validUntil?: boolean
+  totalAmount?: boolean
+  paidAmount?: boolean
+  balanceAmount?: boolean
   movementDate?: boolean
   operationId?: boolean
+  status?: boolean
+  notes?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  convertedToId?: boolean
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
 }, ExtArgs["result"]["movement"]>
 
 export type MovementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  stockMovementCode?: boolean
+  movementType?: boolean
+  contactId?: boolean
+  validUntil?: boolean
+  totalAmount?: boolean
+  paidAmount?: boolean
+  balanceAmount?: boolean
   movementDate?: boolean
   operationId?: boolean
+  status?: boolean
+  notes?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  convertedToId?: boolean
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
 }, ExtArgs["result"]["movement"]>
 
 export type MovementSelectScalar = {
   id?: boolean
+  stockMovementCode?: boolean
+  movementType?: boolean
+  contactId?: boolean
+  validUntil?: boolean
+  totalAmount?: boolean
+  paidAmount?: boolean
+  balanceAmount?: boolean
   movementDate?: boolean
   operationId?: boolean
+  status?: boolean
+  notes?: boolean
   createdById?: boolean
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  convertedToId?: boolean
 }
 
-export type MovementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "movementDate" | "operationId" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["movement"]>
+export type MovementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "stockMovementCode" | "movementType" | "contactId" | "validUntil" | "totalAmount" | "paidAmount" | "balanceAmount" | "movementDate" | "operationId" | "status" | "notes" | "createdById" | "updatedById" | "createdAt" | "updatedAt" | "convertedToId", ExtArgs["result"]["movement"]>
 export type MovementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lines?: boolean | Prisma.Movement$linesArgs<ExtArgs>
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.Movement$paymentsArgs<ExtArgs>
+  accountEntries?: boolean | Prisma.Movement$accountEntriesArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
+  convertedFrom?: boolean | Prisma.Movement$convertedFromArgs<ExtArgs>
   _count?: boolean | Prisma.MovementCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MovementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
 }
 export type MovementIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   operation?: boolean | Prisma.OperationDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  convertedTo?: boolean | Prisma.Movement$convertedToArgs<ExtArgs>
 }
 
 export type $MovementPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Movement"
   objects: {
     lines: Prisma.$MovementLinePayload<ExtArgs>[]
+    contact: Prisma.$ContactPayload<ExtArgs>
     operation: Prisma.$OperationPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
     updatedBy: Prisma.$UserPayload<ExtArgs>
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
+    accountEntries: Prisma.$AccountEntryPayload<ExtArgs>[]
+    convertedTo: Prisma.$MovementPayload<ExtArgs> | null
+    convertedFrom: Prisma.$MovementPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    stockMovementCode: string
+    movementType: string
+    contactId: number
+    validUntil: Date | null
+    totalAmount: runtime.Decimal
+    paidAmount: runtime.Decimal
+    balanceAmount: runtime.Decimal
     movementDate: Date
     operationId: number
+    status: $Enums.MovementStatus
+    notes: string | null
     createdById: number
     updatedById: number
     createdAt: Date
     updatedAt: Date
+    convertedToId: number | null
   }, ExtArgs["result"]["movement"]>
   composites: {}
 }
@@ -1401,9 +2772,14 @@ readonly fields: MovementFieldRefs;
 export interface Prisma__MovementClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   lines<T extends Prisma.Movement$linesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movement$linesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovementLinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contact<T extends Prisma.ContactDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactDefaultArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   operation<T extends Prisma.OperationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OperationDefaultArgs<ExtArgs>>): Prisma.Prisma__OperationClient<runtime.Types.Result.GetResult<Prisma.$OperationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  payments<T extends Prisma.Movement$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movement$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accountEntries<T extends Prisma.Movement$accountEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movement$accountEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  convertedTo<T extends Prisma.Movement$convertedToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movement$convertedToArgs<ExtArgs>>): Prisma.Prisma__MovementClient<runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  convertedFrom<T extends Prisma.Movement$convertedFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movement$convertedFromArgs<ExtArgs>>): Prisma.Prisma__MovementClient<runtime.Types.Result.GetResult<Prisma.$MovementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1434,12 +2810,22 @@ export interface Prisma__MovementClient<T, Null = never, ExtArgs extends runtime
  */
 export interface MovementFieldRefs {
   readonly id: Prisma.FieldRef<"Movement", 'Int'>
+  readonly stockMovementCode: Prisma.FieldRef<"Movement", 'String'>
+  readonly movementType: Prisma.FieldRef<"Movement", 'String'>
+  readonly contactId: Prisma.FieldRef<"Movement", 'Int'>
+  readonly validUntil: Prisma.FieldRef<"Movement", 'DateTime'>
+  readonly totalAmount: Prisma.FieldRef<"Movement", 'Decimal'>
+  readonly paidAmount: Prisma.FieldRef<"Movement", 'Decimal'>
+  readonly balanceAmount: Prisma.FieldRef<"Movement", 'Decimal'>
   readonly movementDate: Prisma.FieldRef<"Movement", 'DateTime'>
   readonly operationId: Prisma.FieldRef<"Movement", 'Int'>
+  readonly status: Prisma.FieldRef<"Movement", 'MovementStatus'>
+  readonly notes: Prisma.FieldRef<"Movement", 'String'>
   readonly createdById: Prisma.FieldRef<"Movement", 'Int'>
   readonly updatedById: Prisma.FieldRef<"Movement", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Movement", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Movement", 'DateTime'>
+  readonly convertedToId: Prisma.FieldRef<"Movement", 'Int'>
 }
     
 
@@ -1857,6 +3243,92 @@ export type Movement$linesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.MovementLineScalarFieldEnum | Prisma.MovementLineScalarFieldEnum[]
+}
+
+/**
+ * Movement.payments
+ */
+export type Movement$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * Movement.accountEntries
+ */
+export type Movement$accountEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AccountEntry
+   */
+  select?: Prisma.AccountEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AccountEntry
+   */
+  omit?: Prisma.AccountEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountEntryInclude<ExtArgs> | null
+  where?: Prisma.AccountEntryWhereInput
+  orderBy?: Prisma.AccountEntryOrderByWithRelationInput | Prisma.AccountEntryOrderByWithRelationInput[]
+  cursor?: Prisma.AccountEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountEntryScalarFieldEnum | Prisma.AccountEntryScalarFieldEnum[]
+}
+
+/**
+ * Movement.convertedTo
+ */
+export type Movement$convertedToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Movement
+   */
+  select?: Prisma.MovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Movement
+   */
+  omit?: Prisma.MovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MovementInclude<ExtArgs> | null
+  where?: Prisma.MovementWhereInput
+}
+
+/**
+ * Movement.convertedFrom
+ */
+export type Movement$convertedFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Movement
+   */
+  select?: Prisma.MovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Movement
+   */
+  omit?: Prisma.MovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MovementInclude<ExtArgs> | null
+  where?: Prisma.MovementWhereInput
 }
 
 /**

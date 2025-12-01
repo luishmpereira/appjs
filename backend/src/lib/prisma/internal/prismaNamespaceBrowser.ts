@@ -58,6 +58,10 @@ export const ModelName = {
   Movement: 'Movement',
   MovementLine: 'MovementLine',
   Operation: 'Operation',
+  Payment: 'Payment',
+  PaymentMethod: 'PaymentMethod',
+  Account: 'Account',
+  AccountEntry: 'AccountEntry',
   UserActivity: 'UserActivity'
 } as const
 
@@ -130,12 +134,22 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 
 export const MovementScalarFieldEnum = {
   id: 'id',
+  stockMovementCode: 'stockMovementCode',
+  movementType: 'movementType',
+  contactId: 'contactId',
+  validUntil: 'validUntil',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  balanceAmount: 'balanceAmount',
   movementDate: 'movementDate',
   operationId: 'operationId',
+  status: 'status',
+  notes: 'notes',
   createdById: 'createdById',
   updatedById: 'updatedById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  convertedToId: 'convertedToId'
 } as const
 
 export type MovementScalarFieldEnum = (typeof MovementScalarFieldEnum)[keyof typeof MovementScalarFieldEnum]
@@ -146,6 +160,8 @@ export const MovementLineScalarFieldEnum = {
   movementId: 'movementId',
   productId: 'productId',
   quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -165,6 +181,62 @@ export const OperationScalarFieldEnum = {
 } as const
 
 export type OperationScalarFieldEnum = (typeof OperationScalarFieldEnum)[keyof typeof OperationScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  paymentCode: 'paymentCode',
+  movementId: 'movementId',
+  amount: 'amount',
+  paymentDate: 'paymentDate',
+  paymentMethodId: 'paymentMethodId',
+  status: 'status',
+  notes: 'notes',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type PaymentMethodScalarFieldEnum = (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum]
+
+
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  accountCode: 'accountCode',
+  name: 'name',
+  accountType: 'accountType',
+  balance: 'balance',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const AccountEntryScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  paymentId: 'paymentId',
+  movementId: 'movementId',
+  amount: 'amount',
+  entryType: 'entryType',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountEntryScalarFieldEnum = (typeof AccountEntryScalarFieldEnum)[keyof typeof AccountEntryScalarFieldEnum]
 
 
 export const UserActivityScalarFieldEnum = {

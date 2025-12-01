@@ -53,6 +53,26 @@ export type MovementLine = Prisma.MovementLineModel
  */
 export type Operation = Prisma.OperationModel
 /**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model PaymentMethod
+ * 
+ */
+export type PaymentMethod = Prisma.PaymentMethodModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model AccountEntry
+ * 
+ */
+export type AccountEntry = Prisma.AccountEntryModel
+/**
  * Model UserActivity
  * 
  */
